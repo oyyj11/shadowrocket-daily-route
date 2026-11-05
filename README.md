@@ -1,6 +1,6 @@
 # 轻舟分流 · DailyRoute v1.1
 
-面向 iPhone Shadowrocket 的配置。**仓库当前只保留这一份配置：DailyRoute-OriginalPlus.conf。** 旧大规则版、兼容版和对应文件已从 main 分支移除，不需要再选择版本。
+面向 iPhone Shadowrocket 的配置。**仓库当前只保留这一份配置：DailyRoute-OriginalPlus.conf。** 旧大规则版、兼容版和对应文件已从 main 分支移除，不需要再选择版本
 
 ## 唯一下载地址
 
