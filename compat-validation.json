@@ -1,0 +1,10 @@
+{
+  "variant": "DailyRoute-Compatibility.conf",
+  "groups": 15,
+  "rules": 115695,
+  "rule_body_unchanged": true,
+  "unresolved_policy_references": 0,
+  "automatic_testing_groups": 0,
+  "sha256": "463e73c3ba42b1f4b03aecc015842e67f416d3bc15d84ff99ebe0aca10fe9869",
+  "validation_scope": "静态检查；未运行 iPhone / Shadowrocket 实测。"
+}

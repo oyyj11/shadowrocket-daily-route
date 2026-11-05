@@ -2,7 +2,22 @@
 
 面向中国大陆日常网络环境的 Shadowrocket 主配置：国内服务直连，海外服务按类别选择节点，Muse 与 Meta 使用共同策略组。
 
-## URL 导入
+
+## 加载慢时的兼容版
+
+如果原版 YouTube 或 App Store 下载缓慢，可用新文件与同一具体节点对比：
+
+```text
+https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-Compatibility.conf
+```
+
+兼容版移除了自动测速组，海外默认跟随首页所选节点；苹果服务默认跟随海外默认，也可切 DIRECT 对比；代理连接阻断 QUIC，使支持回退的客户端使用 TCP/TLS。国内域名及中国大陆 IP 直连规则保持不变。
+
+这是针对选路和协议兼容性的调整，不是已验证的速度修复。未在用户手机上实测；节点吞吐量、拥堵、运营商线路和目标服务器仍影响速度。若效果变差，可切回原版，或删除兼容版 `block-quic = all-proxy` 后再测试。
+
+首次导入后，确认选中的是新文件，首页选具体节点、全局路由选“配置”，暂时关闭旧模块并重新连接。Muse/AI 的资格不受本配置保证。原版默认行为及来源说明见下方。
+
+## 原版 URL 导入
 
 在 Shadowrocket → 配置 → 右上角 ＋ 的 URL 下载框中粘贴：
 
