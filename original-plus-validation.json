@@ -1,9 +1,9 @@
 {
   "base_sha256": "752b299faeddb81118c305056d4f25d6f8f6964ecd08043070e20939555a814f",
-  "rules": 744,
+  "rules": 772,
   "base_rules_preserved": 612,
-  "new_rules": 132,
-  "groups": 9,
+  "new_rules": 160,
+  "groups": 11,
   "general_unchanged": true,
   "host_and_rewrite_unchanged": true,
   "no_country_group_fallback": true,
@@ -37,7 +37,21 @@
     "api.deepseek.com": "DIRECT",
     "www.kimi.com": "DIRECT",
     "www.icbc.com.cn": "DIRECT",
-    "www.apple.com": "DIRECT"
+    "www.apple.com": "DIRECT",
+    "courier.push.apple.com": "苹果推送",
+    "17.249.0.1": "苹果推送",
+    "2620:149:a44::1": "苹果推送",
+    "api.telegram.org": "Telegram",
+    "t.me": "Telegram",
+    "telegram.me": "Telegram",
+    "149.154.160.1": "Telegram",
+    "91.108.4.1": "Telegram",
+    "2001:b28:f23d::1": "Telegram",
+    "api.x.com": "海外社交",
+    "api.twitter.com": "海外社交",
+    "t.co": "海外社交"
   },
-  "scope": "静态检查；未真机验证，未检测用户节点出口地区与速度。"
+  "scope": "静态检查；未真机验证，未检测用户节点出口地区与速度。",
+  "notification_update": "2026-11-05",
+  "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery."
 }

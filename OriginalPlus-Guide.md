@@ -2,7 +2,7 @@
 
 适用文件：**DailyRoute-OriginalPlus.conf**。说明更新：2026-11-05。
 
-本版共 744 条规则、9 个分组。基于原来播放 YouTube 较快的 default.conf 补充，目标为 Muse 已知请求走美国、ChatGPT 已知请求走日本，国内常用服务直连，其他海外服务可独立选路。
+本版共 772 条规则、11 个分组。基于原来播放 YouTube 较快的 default.conf 补充，目标为 Muse 已知请求走美国、ChatGPT 已知请求走日本，国内常用服务直连，其他海外服务可独立选路。
 
 ## 目录
 
@@ -115,6 +115,8 @@ REJECT 表示拒绝连接。文件不知道你已有订阅的实际节点，因�
 
 | 分组 | 默认选择 | 可选方式 |
 |---|---|---|
+| 苹果推送 | DIRECT | PROXY / 手动节点，仅连接被规则处理时生效 |
+| Telegram | PROXY | 手动节点 / 自动低延迟 |
 | Muse美国 | REJECT，首次必须选美国节点 | 手动选择地区筛选结果 |
 | ChatGPT日本 | REJECT，首次必须选日本节点 | 手动选择地区筛选结果 |
 | YouTube | PROXY | 自动低延迟 / 手动节点 |
@@ -221,12 +223,17 @@ PROXY 跟随首页当前节点。“手动节点”是共用组，多个应用�
 
 ## 十一、修改内容、来源和验证范围
 
-本版保留原 General（系统 DNS、IPv6、UDP、QUIC 行为）、Host、URL Rewrite。原 612 条规则匹配条件和顺序保留；代理策略引用调整到对应分组，OpenAI 专用条目指向日本。前置新增 132 条规则，新增 9 个分组。
+本版保留原 General（系统 DNS、IPv6、UDP、QUIC 行为）、Host、URL Rewrite。原 612 条规则匹配条件和顺序保留；代理策略引用调整到对应分组，OpenAI 专用条目指向日本。前置新增 160 条规则，新增 11 个分组。
 
 没有合入旧版 11.6 万条规则，没有新增解密、证书或脚本。推荐版以用户提供的 default.conf 为基线；操作和语法核对参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)，实际界面以安装版本为准。
 
 仓库的 sources.json、旧使用说明和 GPL 许可证主要对应历史 blackmatrix7 规则合集，不能把旧版统计和默认值直接套用于推荐版。
 
-[original-plus-validation.json](original-plus-validation.json) 记录：原网络参数和 Host/Rewrite 保留；旧规则顺序与匹配条件保持；策略引用有效且无循环；IP 格式；29 个代表域名分类；地区名称筛选正反例。发布后另核对公开 Raw URL 能下载且发布文本一致。
+[original-plus-validation.json](original-plus-validation.json) 记录：原网络参数和 Host/Rewrite 保留；旧规则顺序与匹配条件保持；策略引用有效且无循环；IP 格式；211 个代表域名分类；地区名称筛选正反例。发布后另核对公开 Raw URL 能下载且发布文本一致。
 
 静态检查不是官方解析器验证、真机运行、节点测速、真实国家核验或完整接口覆盖。反馈时说明配置名、App、Wi-Fi/蜂窝、组内选择、测试结果及失败请求的域名，遮住敏感凭据。
+
+
+## 十二、Telegram、X 等通知推送
+
+见新增的 [通知设置与验证指南](Notifications-Guide.md)。Telegram 已有域名改指向独立 Telegram 组，并补充官方服务器 IP；Apple 推送提供独立可选策略，默认直连。不改变 Muse 美国、ChatGPT 日本或国内直连策略。系统是否显示通知还取决于权限、聊天静音、专注模式等，不能仅靠规则保证。

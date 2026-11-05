@@ -37,11 +37,17 @@ https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRout
 
 PROXY 是首页所选节点；DIRECT 是直连；REJECT 是拒绝。自动低延迟比较连通延迟，不保证视频带宽最高。节点名称筛选也不证明真实出口国家。
 
+## Telegram、X 等通知推送
+
+本版增加 Telegram 官方 IPv4/IPv6 地址规则，并将 Telegram 业务独立分组；X 等已知域名继续走海外社交。Apple APNs 共享推送连接使用“苹果推送”组，默认 DIRECT，直连异常时可尝试切换到稳定的具体代理出口。
+
+通知还需要 iOS 和 App 内权限。不要解密推送连接，也不要把所有 Apple IP 或所有端口统一强制代理。**[通知启用与锁屏验证步骤](Notifications-Guide.md)**
+
 ## 版本列表
 
 | 文件 | 用途 | 建议 |
 |---|---|---|
-| **DailyRoute-OriginalPlus.conf** | 原 default.conf 增强版，744 条规则、9 个分组 | **当前推荐** |
+| **DailyRoute-OriginalPlus.conf** | 原 default.conf 增强版，772 条规则、11 个分组 | **当前推荐** |
 | DailyRoute-Compatibility.conf | 旧大规则版的固定出口及 QUIC 兼容性尝试 | 历史对照 |
 | Shadowrocket-Daily.conf | 初期约 11.6 万条规则合集 | 历史对照 |
 
@@ -49,7 +55,7 @@ PROXY 是首页所选节点；DIRECT 是直连；REJECT 是拒绝。自动低延
 
 ## 来源与验证
 
-推荐版基于用户提供的 Shadowrocket 默认配置，保留原 612 条规则的匹配条件和顺序，调整代理策略引用并前置新增 132 条规则。操作和语法参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)。
+推荐版基于用户提供的 Shadowrocket 默认配置，保留原 612 条规则的匹配条件和顺序，调整代理策略引用并前置新增 160 条规则。操作和语法参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)。
 
 旧大规则版使用 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 的规则，GPL-2.0 许可证和来源记录保存在仓库。它不是当前推荐版的完整基线。
 
