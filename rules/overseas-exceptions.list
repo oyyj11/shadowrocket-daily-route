@@ -1,0 +1,9 @@
+# DailyRoute shared rules: overseas-exceptions
+# Policy belongs to the LOCAL main configuration. No nodes or credentials here.
+DOMAIN-SUFFIX,apple-relay.akamaized.net
+DOMAIN-SUFFIX,apple-relay.apple.com
+DOMAIN-SUFFIX,apple-relay.cloudflare.com
+DOMAIN-SUFFIX,apple-relay.fastly-edge.com
+DOMAIN,copilot.microsoft.com
+DOMAIN,copilot.bing.com
+DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net

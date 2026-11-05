@@ -1,0 +1,5 @@
+# DailyRoute shared rules: appstore
+# Policy belongs to the LOCAL main configuration. No nodes or credentials here.
+DOMAIN-SUFFIX,apps.apple.com
+DOMAIN-SUFFIX,itunes.apple.com
+DOMAIN-SUFFIX,mzstatic.com

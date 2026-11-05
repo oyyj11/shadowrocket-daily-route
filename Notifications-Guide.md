@@ -1,6 +1,6 @@
 # Telegram、X 等应用：通知设置与验证
 
-适用：最新 `DailyRoute-OriginalPlus.conf`。更新日期：2026-11-05。
+适用：v1.2 模板复制后的本地配置 `DailyRoute-Local.conf`。更新日期：2026-11-05。
 
 ## 这次补充了什么
 
@@ -33,7 +33,7 @@ APNs 通道正常，有时能先收到通知，但打开 App 加载详情、下�
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
 ```
 
-更新配置或重新下载后，选中该文件，首页全局路由选“配置”。重新检查 Muse美国、ChatGPT日本 中的选择；更新可能将它们恢复为 REJECT。
+已迁移到 v1.2 的用户，只需对本地副本使用“使用配置/编译配置”刷新远程规则，不要重新用整份模板覆盖个人副本。首次迁移按 [完整说明](OriginalPlus-Guide.md) 复制本地配置、移除 update-url 并选择美国/日本节点。规则集应成功 11/11。
 
 在代理分组中确认：
 

@@ -1,8 +1,8 @@
 {
   "base_sha256": "752b299faeddb81118c305056d4f25d6f8f6964ecd08043070e20939555a814f",
-  "rules": 772,
+  "rules": 728,
   "base_rules_preserved": 612,
-  "new_rules": 160,
+  "new_rules": null,
   "groups": 11,
   "general_unchanged": true,
   "host_and_rewrite_unchanged": true,
@@ -49,12 +49,84 @@
     "2001:b28:f23d::1": "Telegram",
     "api.x.com": "海外社交",
     "api.twitter.com": "海外社交",
-    "t.co": "海外社交"
+    "t.co": "海外社交",
+    "apple-relay.apple.com": "海外通用",
+    "copilot.microsoft.com": "海外通用"
   },
-  "scope": "静态检查；未真机验证，未检测用户节点出口地区与速度。",
+  "scope": "Static rule/priority checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.",
   "notification_update": "2026-11-05",
   "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery.",
-  "release": "v1.1",
-  "config_sha256": "314fae34287067776a0d8690fd1ea38c61123af6eddad439a83aad4ab5fe9378",
-  "release_note": "统一为唯一主配置；除版本注释外，配置行为与上一版一致。"
+  "release": "v1.2",
+  "config_sha256": "f460e12946cc04137ac1a0593f5974f0f5dfca8df0091fe0c67ee358f51f1705",
+  "release_note": "本地个人节点组 + 远程规则集；一次迁移后只刷新规则，不覆盖组定义。",
+  "rule_sets": [
+    {
+      "file": "rules/apple-push.list",
+      "policy": "苹果推送",
+      "rules": 10,
+      "sha256": "e5ebcd6183fe75c252f581f0b4b2d8dee2daab3e6568a22627cf1ead9122d73f"
+    },
+    {
+      "file": "rules/telegram.list",
+      "policy": "Telegram",
+      "rules": 20,
+      "sha256": "968f9ae3ba7336b487e96ece7703d88a6f22b0c1137377aa9d253babebfd80a5"
+    },
+    {
+      "file": "rules/muse-us.list",
+      "policy": "Muse美国",
+      "rules": 4,
+      "sha256": "0bdba016db6393d7ba50d1158f1d027664c8bddd9dc40eadf4ccfc6af16ab48c"
+    },
+    {
+      "file": "rules/chatgpt-jp.list",
+      "policy": "ChatGPT日本",
+      "rules": 17,
+      "sha256": "ae0b85d72007f30f58b9d15eabe5bf193eb134ffb70dd77192e9f3c81b6d3015"
+    },
+    {
+      "file": "rules/youtube.list",
+      "policy": "YouTube",
+      "rules": 8,
+      "sha256": "937e6f65788b17c6334f3fbf7300ded2a41cbd28bdba8fa9f9e3b6ad7a78e1ab"
+    },
+    {
+      "file": "rules/appstore.list",
+      "policy": "AppStore下载",
+      "rules": 3,
+      "sha256": "3713228cc2d2fdaaa9242a274746157a344c0f9e992c9b8fc2e31e4a8bf823a8"
+    },
+    {
+      "file": "rules/streaming.list",
+      "policy": "海外流媒体",
+      "rules": 16,
+      "sha256": "6d8a9652cc78fd4a85ca621dc0f7a32349481173fe146a5c935f43b2d5a46f66"
+    },
+    {
+      "file": "rules/social.list",
+      "policy": "海外社交",
+      "rules": 15,
+      "sha256": "c29e7ed14c8094543e6018e6eed32487945c580bdd4ff9e46134e4ae4ad8827a"
+    },
+    {
+      "file": "rules/overseas-exceptions.list",
+      "policy": "海外通用",
+      "rules": 7,
+      "sha256": "96644f23f745e63fe1b72c914a69c1475b2a324c34056940520c90762631f6a9"
+    },
+    {
+      "file": "rules/direct.list",
+      "policy": "DIRECT",
+      "rules": 386,
+      "sha256": "7a29b7ed0e35fd1a5bfc66f72ad30c03e026d8ac48d5519bef2af7ca2d5d3646"
+    },
+    {
+      "file": "rules/overseas.list",
+      "policy": "海外通用",
+      "rules": 240,
+      "sha256": "9caa9c5ca39a085fcf041c3c45944c6ca1073754aacfe9fb722133410b23b165"
+    }
+  ],
+  "migration_witnesses": 1375,
+  "migration_mismatches": []
 }

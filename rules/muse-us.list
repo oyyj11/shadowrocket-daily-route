@@ -1,0 +1,6 @@
+# DailyRoute shared rules: muse-us
+# Policy belongs to the LOCAL main configuration. No nodes or credentials here.
+DOMAIN-SUFFIX,muse.ai
+DOMAIN-SUFFIX,meta.ai
+DOMAIN,auth.meta.com
+DOMAIN,accountscenter.meta.com

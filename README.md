@@ -1,51 +1,61 @@
-# 轻舟分流 · DailyRoute v1.1
+# 轻舟分流 · DailyRoute v1.2
 
-面向 iPhone Shadowrocket 的配置。**仓库当前只保留这一份配置：DailyRoute-OriginalPlus.conf。** 旧大规则版、兼容版和对应文件已从 main 分支移除，不需要再选择版本
+**本地保存节点选择，远程同步规则。** Muse 已知请求走美国，ChatGPT 已知请求走日本；国内常用服务直连，普通海外可手动或自动选路。保留原系统 DNS、IPv6、QUIC 参数。
 
-## 唯一下载地址
+## 固定配置入口
 
 ```text
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
 ```
 
-沿用此前的原配置增强版 URL，方便手机覆盖更新。配置头部显示 **DailyRoute v1.1**。本次统一版本与文档，分流行为与上一版相同，不是新的提速方案。
+此地址是初始化模板，保持不变。日常同步的是模板引用的 `rules/*.list`，不是反复用整份模板覆盖手机个人设置。
 
-## 首次启用 / 覆盖更新
+## 必须做一次的迁移
 
-1. 先记录 Muse 的美国节点、ChatGPT 的日本节点及其他组的选择；备份本地修改。
-2. Shadowrocket → 底部 **配置** → ＋ → URL 粘贴上方链接 → 下载。已有远程文件且菜单有“更新配置”时，也可直接更新。
-3. 在 **本地文件** 找到 DailyRoute-OriginalPlus.conf，点击文件名 → **使用配置**（若弹出菜单），确认旁边有 **✓**。
-4. 首页全局路由选 **配置**。首页下拉 / 节点列表上方指示牌图标进入分组。
-5. **Muse美国** 选实际美国节点，**ChatGPT日本** 选实际日本节点。两个组首次默认 REJECT；更新后也应重新核对。
-6. 首页选原来 YouTube 流畅的具体节点，保存后断开再连接，并重开目标 App。
+1. 记录当前 Muse、ChatGPT 和其他组的节点选择，备份个人配置。
+2. Shadowrocket → 配置 → ＋ → URL 填上方链接 → 下载。
+3. 点击下载的文件 → 编辑配置 → 复制（具体菜单随版本变化），将副本命名为 **DailyRoute-Local.conf**。这里使用“复制”，不选“扩展配置”。
+4. 编辑副本的纯文本，在 `[General]` 中删除应用自动添加的 `update-url = ...`（若没有就不用删）；保留所有 RULE-SET 行。确认副本不再有整份配置更新地址。
+5. 点击 **DailyRoute-Local.conf → 使用配置**，确认 ✓ 在副本旁，首页全局路由选 **配置**。
+6. Muse美国 选实际美国节点、ChatGPT日本 选实际日本节点。初始 REJECT 只用于首次待配置状态。
+7. 配置的“规则集 URL”应下载成功 **11/11**。先测试基本连接，再开启后台更新。
+8. Shadowrocket 设置 → 配置 → 自动后台更新，选择可用间隔（例如 1 天）；iPhone 设置 → 通用 → 后台 App 刷新，允许 Shadowrocket。不要把“节点订阅更新”当作规则更新。
 
-仓库删文件不会自动删除 iPhone 已下载的旧文件。确认 v1.1 正常使用后，在配置列表中通过文件菜单或左滑删除旧大规则版、兼容版及重复副本；保留个人原配置备份即可。不要删除节点订阅。
+以后只刷新远程规则集，本地组定义、节点选择和网络参数不在公共规则文件里，不会被远程规则覆盖。不要再对已经设置好的本地副本执行“从服务器整份更新配置”。
 
-## 分流与推送
+**[完整迁移与使用步骤](OriginalPlus-Guide.md) · [自动同步和共同维护](AUTOMATION.md) · [通知指南](Notifications-Guide.md)**
 
-| 服务 | 当前策略 |
+## 两级同步
+
+| 环节 | 实现 |
 |---|---|
-| Muse 已知域名及指定认证域名 | Muse美国，需用户选择美国节点 |
-| ChatGPT/OpenAI 已知接口和静态资源 | ChatGPT日本，需用户选择日本节点 |
-| YouTube | PROXY，跟随首页节点，可切自动低延迟 |
-| App Store 下载相关域名 | PROXY，可切 DIRECT 比较 |
-| Telegram 域名及官方服务器 IP | Telegram，默认 PROXY |
-| X 等海外社交、常见流媒体 | 独立组，默认 PROXY，可切自动低延迟 |
-| Apple 共享推送连接 | 苹果推送，默认 DIRECT，可切代理排查 |
-| 国内常用服务及中国大陆 IP | DIRECT，使用当前 Wi-Fi/蜂窝网络 |
+| 你和朋友维护规则 | 编辑对应 rules/*.list，合并到 main，固定规则 URL 即更新 |
+| GitHub 定时同步 | 每天北京时间 11:17 尝试同步 Telegram 官方 IP，校验通过才提交，有变更才产生提交 |
+| 手机定期更新 | Shadowrocket 配置后台更新，刷新当前本地主配置引用的规则集 |
+| 个人节点设置 | 只留在各自手机本地副本，首次选择后无需因公共规则更新反复重选 |
 
-PROXY 是首页节点；DIRECT 是直连；REJECT 是拒绝。名称筛选不证明真实出口国家，自动低延迟不保证视频带宽最高。Apple 系统连接可能不经过规则，通知还取决于系统和 App 的权限、静音、专注等设置。
+GitHub 定时任务可能延迟；iOS 后台任务也不是准点保证。定时同步目前只自动拉取 Telegram 官方地址，其他服务域名由维护者审核修改；没有重新引入旧大规则合集。
 
-## 文档与验证
+## 默认策略
 
-- **[完整使用说明](OriginalPlus-Guide.md)**：下载、选中配置、地区节点、自动选择、速度排查、更新和回退。
-- **[通知推送指南](Notifications-Guide.md)**：Telegram、X、苹果推送、权限和锁屏测试。
-- [静态验证结果](original-plus-validation.json)：772 条规则、11 个分组、41 项域名/IP 匹配检查。
-- [推送规则的官方数据来源](notification-sources.json)
-- [更新记录](CHANGELOG.md)
+| 服务 | 策略 |
+|---|---|
+| Muse | Muse美国，首次选择美国节点 |
+| ChatGPT/OpenAI | ChatGPT日本，首次选择日本节点 |
+| YouTube | PROXY，优先沿用原来流畅的首页节点，可切自动低延迟 |
+| App Store 下载 | PROXY，可切 DIRECT 比较 |
+| Telegram | 独立 Telegram 组，默认 PROXY |
+| X 等海外社交 / 流媒体 | 独立组，默认 PROXY，可切自动低延迟 |
+| Apple 共享推送 | 苹果推送，默认 DIRECT；系统连接可能旁路 |
+| 国内常用服务和中国大陆 IP | DIRECT，使用当前 Wi-Fi/蜂窝网络 |
 
-基线是用户提供的 Shadowrocket default.conf，保留原网络参数与 612 条旧规则的匹配顺序，新增服务分类。操作语法参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)，Telegram IP 来源于其官方列表，推送范围参考 Apple 官方说明。
+名称筛选不证明实际出口国家；低延迟不代表视频吞吐量最高。地区组不提供其他地区回退，但未收录的新接口仍需检查连接记录。通知还依赖系统权限、专注模式和 App 内开关。
 
-不提供节点、订阅，不需要解密证书或脚本；未设置定时生成或自动发布。静态检查和公开 URL 下载核验不等于真机速度、完整接口覆盖、通知送达或平台资格保证。
+## 验证和目录
 
-仓库公开；文件及变更历史可查看。旧文件从当前 main 移除，Git 历史仍保留。
+- [original-plus-validation.json](original-plus-validation.json)：728 条去重后规则、11 个本地分组、11 个远程集、43 项回归检查；迁移时 1375 个样本的路由结果与前版相同。
+- [GitHub Actions](https://github.com/oyyj11/shadowrocket-daily-route/actions)：push/PR 校验，定时和手动同步。
+- [规则脚本](scripts/)：Python 标准库；同步失败或校验不通过时不发布新的 Telegram 数据。
+- [通知官方数据来源](notification-sources.json) · [更新记录](CHANGELOG.md)
+
+当前 main 只有一份初始化 .conf；不包含节点账号、订阅密钥、证书或解密脚本。规则分类参考用户提供的 default.conf，操作语法参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)。静态和服务器 CI 校验不能代替手机实测、速度测试和平台资格核验。
