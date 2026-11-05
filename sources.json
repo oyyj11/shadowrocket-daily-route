@@ -1,0 +1,194 @@
+[
+  {
+    "name": "Lan",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Lan/Lan.list",
+    "sha256": "79c3b96f8064bf1b53678fb0dc7d9e92d74c729869fe8dc494afa2e9b12e2856",
+    "companion": null,
+    "imported": 142,
+    "skipped": 0
+  },
+  {
+    "name": "OpenAI",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/OpenAI/OpenAI.list",
+    "sha256": "6f4047cdbf6953cf5d9b38c4ccd6da7bc6f1acb91b7a87134f25d5b8f5d2408b",
+    "companion": null,
+    "imported": 31,
+    "skipped": 4
+  },
+  {
+    "name": "Claude",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Claude/Claude.list",
+    "sha256": "870e7e25d798e7f00338507f773b0eea4dfd15e25e9df0a27d5ae421ae1ab378",
+    "companion": null,
+    "imported": 1,
+    "skipped": 2
+  },
+  {
+    "name": "Gemini",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Gemini/Gemini.list",
+    "sha256": "db8f69154426dca76792ab80b3ad6b0e2d078ebe0e52e76faec1724245a4ec49",
+    "companion": null,
+    "imported": 12,
+    "skipped": 1
+  },
+  {
+    "name": "YouTube",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/YouTube/YouTube.list",
+    "sha256": "f764cd91a779982225b3553ece8033c86a6545f4990f5fefd356805de962aee9",
+    "companion": null,
+    "imported": 183,
+    "skipped": 7
+  },
+  {
+    "name": "Netflix",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Netflix/Netflix.list",
+    "sha256": "ec37f90727e7db062d754487c4bed68ae8bba28f349aef0995f10c06f5e8b231",
+    "companion": null,
+    "imported": 1156,
+    "skipped": 1
+  },
+  {
+    "name": "Disney",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Disney/Disney.list",
+    "sha256": "65ededc7b608e440f3d918f6e95b19ca52460c8fe368dbd9e840b4bc8669f753",
+    "companion": null,
+    "imported": 172,
+    "skipped": 1
+  },
+  {
+    "name": "Spotify",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Spotify/Spotify.list",
+    "sha256": "577afc9442a38c578e0aa8769b192d2f935e808114c60cbd5afd2294c79b74d0",
+    "companion": null,
+    "imported": 29,
+    "skipped": 1
+  },
+  {
+    "name": "TikTok",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/TikTok/TikTok.list",
+    "sha256": "94262918311e66c8a3bcf5a65173ff0c4e1ceaa29e24644acafadc127121a295",
+    "companion": null,
+    "imported": 33,
+    "skipped": 2
+  },
+  {
+    "name": "Facebook",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Facebook/Facebook.list",
+    "sha256": "747563c96825bbd5f868be955543b0ca1979064e7b094f8aab08aafbce577c36",
+    "companion": null,
+    "imported": 560,
+    "skipped": 10
+  },
+  {
+    "name": "Instagram",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Instagram/Instagram.list",
+    "sha256": "65f28f9253b0dbb2a81485c788537896a0817766685e7bd91b2f90ec7aa19548",
+    "companion": null,
+    "imported": 1,
+    "skipped": 3
+  },
+  {
+    "name": "Whatsapp",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Whatsapp/Whatsapp.list",
+    "sha256": "644fd145b484079ff65f681deb17a6dbf1aff620afea56b1a3c24d29d9f9db4f",
+    "companion": null,
+    "imported": 14,
+    "skipped": 3
+  },
+  {
+    "name": "Telegram",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Telegram/Telegram.list",
+    "sha256": "09f093cce5b3e2994147a2640e03040aac75e1db7bf2103fd1c9a2509b0176ab",
+    "companion": null,
+    "imported": 40,
+    "skipped": 0
+  },
+  {
+    "name": "Twitter",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Twitter/Twitter.list",
+    "sha256": "64c836f2431ca0d4728cc545bb74280ee50c886e346040012e6cdd2f3eee3f97",
+    "companion": null,
+    "imported": 32,
+    "skipped": 1
+  },
+  {
+    "name": "Discord",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Discord/Discord.list",
+    "sha256": "3d18c8fe716de06891ba3d6c34dba254cb65138a10f79e1a1a0628b5237ecb2c",
+    "companion": null,
+    "imported": 29,
+    "skipped": 0
+  },
+  {
+    "name": "Line",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Line/Line.list",
+    "sha256": "d13bdaa601bdf37d20dfaf04c2561a06eb9067a81fcd407183730272a0264c92",
+    "companion": null,
+    "imported": 23,
+    "skipped": 1
+  },
+  {
+    "name": "GitHub",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/GitHub/GitHub.list",
+    "sha256": "ced8ab0ecda5775d04ec8ee6a57b282181108565331a6a1d85e9a26fee25d79b",
+    "companion": null,
+    "imported": 31,
+    "skipped": 0
+  },
+  {
+    "name": "Google",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Google/Google.list",
+    "sha256": "c6efe08ab4c0a12ddba20f5e75abfba2dd63a42b810f8cb5c303433a38e93b73",
+    "companion": null,
+    "imported": 691,
+    "skipped": 7
+  },
+  {
+    "name": "Apple",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple.list",
+    "sha256": "438384889951117d5f432b600c4b3009583f466de7e87bbe2db865a2ac732a0c",
+    "companion": {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Apple/Apple_Domain.list",
+      "sha256": "f1074adb086fd44a95db76e9dcc96fc1133f0ec4c29b15d6f2346686deb25d00",
+      "rules": 1559
+    },
+    "imported": 1578,
+    "skipped": 24
+  },
+  {
+    "name": "Microsoft",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Microsoft/Microsoft.list",
+    "sha256": "22df1a1017ad5d41755bf020ca8eb9afeedc7bdc2c649ed2074b255227a7ed8e",
+    "companion": null,
+    "imported": 667,
+    "skipped": 4
+  },
+  {
+    "name": "Steam",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Steam/Steam.list",
+    "sha256": "290ebccc4be56defc7d36f85d8c9777101548a4f2147ca29fe50b794c6a8dec7",
+    "companion": null,
+    "imported": 69,
+    "skipped": 0
+  },
+  {
+    "name": "Epic",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/Epic/Epic.list",
+    "sha256": "8f5fcadadd967023aa81273803de80beb2ceadd9af4e9352b565b3b00ccf464d",
+    "companion": null,
+    "imported": 14,
+    "skipped": 1
+  },
+  {
+    "name": "ChinaMaxNoIP",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMaxNoIP/ChinaMaxNoIP.list",
+    "sha256": "691e62885382b16b1170b03ebebb4b6dc72d820289ecc61b8af58073f023a527",
+    "companion": {
+      "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Shadowrocket/ChinaMaxNoIP/ChinaMaxNoIP_Domain.list",
+      "sha256": "24e1ef3168f178538ae23f85ea027930835205e56b124c002ddf89e0f9a9f3e4",
+      "rules": 110104
+    },
+    "imported": 110108,
+    "skipped": 121
+  }
+]
