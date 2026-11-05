@@ -1,7 +1,22 @@
 # 轻舟分流 · DailyRoute
 
-面向中国大陆日常网络环境的 Shadowrocket 主配置：国内服务直连，海外服务按类别选择节点，Muse 与 Meta 使用共同策略组。
+面向日常使用的 Shadowrocket 配置。推荐最新的原配置增强版：Muse 指定美国、ChatGPT 指定日本，国内服务直连，其他海外服务独立选路。
 
+
+
+## 最新：基于用户原配置的增强版
+
+原配置只有 612 条规则，使用系统 DNS。本版保留原网络参数与规则顺序，增加 Muse 美国、ChatGPT 日本、YouTube 和 App Store 等分组，共 744 条规则。
+
+```text
+https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
+```
+
+**首次导入必须在 Muse美国、ChatGPT日本组各选择一个对应地区的实际节点。两个组默认 REJECT，防止误走首页其他地区节点。** 其他海外服务默认沿用首页节点，需要自动调节时在对应组选择自动低延迟。
+
+[完整说明与首次设置](OriginalPlus-Guide.md) · [静态验证](original-plus-validation.json)
+
+下方大规则版及兼容版属于旧方案，与本版相互独立；不要同时当模块叠加。
 
 ## 加载慢时的兼容版
 
