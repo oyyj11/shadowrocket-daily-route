@@ -1,6 +1,6 @@
-# 原配置增强版：完整使用说明
+# DailyRoute v1.1：完整使用说明
 
-适用文件：**DailyRoute-OriginalPlus.conf**。说明更新：2026-11-05。
+适用文件：**DailyRoute-OriginalPlus.conf**，当前唯一版本 **v1.1**。说明更新：2026-11-05。
 
 本版共 772 条规则、11 个分组。基于原来播放 YouTube 较快的 default.conf 补充，目标为 Muse 已知请求走美国、ChatGPT 已知请求走日本，国内常用服务直连，其他海外服务可独立选路。
 
@@ -225,9 +225,9 @@ PROXY 跟随首页当前节点。“手动节点”是共用组，多个应用�
 
 本版保留原 General（系统 DNS、IPv6、UDP、QUIC 行为）、Host、URL Rewrite。原 612 条规则匹配条件和顺序保留；代理策略引用调整到对应分组，OpenAI 专用条目指向日本。前置新增 160 条规则，新增 11 个分组。
 
-没有合入旧版 11.6 万条规则，没有新增解密、证书或脚本。推荐版以用户提供的 default.conf 为基线；操作和语法核对参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)，实际界面以安装版本为准。
+没有新增解密、证书或脚本。推荐版以用户提供的 default.conf 为基线；操作和语法核对参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)，实际界面以安装版本为准。
 
-仓库的 sources.json、旧使用说明和 GPL 许可证主要对应历史 blackmatrix7 规则合集，不能把旧版统计和默认值直接套用于推荐版。
+当前 main 分支只保留本配置，旧大规则版、兼容版和对应说明已删除。历史仍可在 Git 提交记录中查看。
 
 [original-plus-validation.json](original-plus-validation.json) 记录：原网络参数和 Host/Rewrite 保留；旧规则顺序与匹配条件保持；策略引用有效且无循环；IP 格式；211 个代表域名分类；地区名称筛选正反例。发布后另核对公开 Raw URL 能下载且发布文本一致。
 
@@ -237,3 +237,12 @@ PROXY 跟随首页当前节点。“手动节点”是共用组，多个应用�
 ## 十二、Telegram、X 等通知推送
 
 见新增的 [通知设置与验证指南](Notifications-Guide.md)。Telegram 已有域名改指向独立 Telegram 组，并补充官方服务器 IP；Apple 推送提供独立可选策略，默认直连。不改变 Muse 美国、ChatGPT 日本或国内直连策略。系统是否显示通知还取决于权限、聊天静音、专注模式等，不能仅靠规则保证。
+
+
+## 十三、v1.1 与手机旧文件清理
+
+本次没有改变推送、地区组、国内直连或其他网络行为，仅统一版本和下载入口。编辑纯文本时，第一行应显示“DailyRoute v1.1”。
+
+已有相同远程文件可使用“更新配置”；重新下载后若手机产生重复副本，先通过文件头部确认新版本并启用，正常后再删除旧副本。配置更新可能覆盖本地修改并改变组内选择，请先记录，再核对美国、日本节点。
+
+GitHub 删除旧文件不会自动操作手机。手机旧的 Shadowrocket-Daily.conf、DailyRoute-Compatibility.conf 可在配置列表的文件菜单或左滑删除；保留个人 default.conf 备份用于回退。不要把配置清理误当成删除节点订阅。

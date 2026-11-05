@@ -53,5 +53,8 @@
   },
   "scope": "静态检查；未真机验证，未检测用户节点出口地区与速度。",
   "notification_update": "2026-11-05",
-  "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery."
+  "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery.",
+  "release": "v1.1",
+  "config_sha256": "314fae34287067776a0d8690fd1ea38c61123af6eddad439a83aad4ab5fe9378",
+  "release_note": "统一为唯一主配置；除版本注释外，配置行为与上一版一致。"
 }
