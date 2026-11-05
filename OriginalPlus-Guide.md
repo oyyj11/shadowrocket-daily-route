@@ -1,6 +1,16 @@
-# DailyRoute v1.2：迁移和使用说明
+# DailyRoute v1.3：迁移和使用说明
 
-v1.2 解决的是整份配置更新覆盖个人节点选择的问题。固定模板 URL 不变；规则变成远程列表，个人组和节点选择留在本地。
+v1.3 解决的是整份配置更新覆盖个人节点选择的问题。固定模板 URL 不变；规则变成远程列表，个人组和节点选择留在本地。
+
+## 0. 先选择 APNs 默认直连或默认代理
+
+APNs 即 Apple Push Notification service。常规入口 DailyRoute-OriginalPlus.conf 默认 DIRECT；新入口 DailyRoute-APNs-Proxy.conf 默认 PROXY。代理版 URL：
+
+```text
+https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf
+```
+
+下面的安装步骤对两者相同。选其中一份即可，两个都是当前 v1.3，共用规则集。代理版仅改变苹果推送默认选项，不改变 Muse/ChatGPT 地区或其他应用设置。已有本地副本可以直接改苹果推送组，不必重新初始化。
 
 ## 1. 下载模板并复制成本地配置
 
@@ -74,7 +84,7 @@ iOS 后台调度不保证准点；重启手机、强制结束 App 等可能影�
 
 ## 6. 其他应用、速度和自动选路
 
-YouTube、App Store、Telegram、海外社交、海外流媒体、海外通用默认 PROXY，跟随首页具体节点。苹果推送默认 DIRECT。国内已知域名及中国大陆 IP 为 DIRECT。
+YouTube、App Store、Telegram、海外社交、海外流媒体、海外通用默认 PROXY，跟随首页具体节点。苹果推送默认值取决于所选模板（直连版 DIRECT，代理版 PROXY）。国内已知域名及中国大陆 IP 为 DIRECT。
 
 YouTube 先使用原配置下流畅的同一个首页节点；要试自动选择，在 YouTube 组单独选“自动低延迟”。海外通用、社交、流媒体也需要各自选择，并不互相跟随。自动组每 900 秒比较测试地址延迟，公差 150；它不检测视频带宽、解锁或账号资格。
 

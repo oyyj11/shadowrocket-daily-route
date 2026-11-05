@@ -69,3 +69,8 @@ python scripts/sync_telegram.py
 CI 检查不是 Shadowrocket 官方解析器或真机实测。手机首次必须 11/11 成功下载规则，并验证一次手动刷新前后节点选择和服务访问。后台更新是否执行由手机系统状态决定。
 
 参考：[Shadowrocket 社区手册：自动更新与本地资源刷新](https://github.com/LOWERTOP/Shadowrocket#自动更新)。
+
+
+## APNs 变体维护
+
+基础模板为 DailyRoute-OriginalPlus.conf（默认直连）。修改主模板后运行 `python scripts/build_variants.py` 生成 DailyRoute-APNs-Proxy.conf。CI 严格比较两份文件，只允许苹果推送默认选项和 APNs 模式注释不同。两者共用 rules/*.list，定时同步不复制出两套规则，也不改个人副本。

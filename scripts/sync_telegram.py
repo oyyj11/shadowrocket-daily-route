@@ -14,21 +14,21 @@ def main():
     assert any(n.version==4 for n in networks) and any(n.version==6 for n in networks)
     assert all(n.is_global and n.prefixlen>0 for n in networks),'Non-global or default-route entry'
     assert len(set(networks))==len(networks),'Duplicate networks'
-    p=ROOT/'rules'/'telegram.list'; prior=p.read_text(encoding='utf-8')
+    p=ROOT/'rules'/'telegram.list'; prior_bytes=p.read_bytes(); prior=p.read_text(encoding='utf-8')
     retained=[l for l in prior.splitlines() if not l.startswith('IP-CIDR,') and not l.startswith('# Telegram CIDR source:')]
     updated='\n'.join(retained).rstrip()+'\n# Telegram CIDR source: '+URL+'\n'+'\n'.join(f'IP-CIDR,{n},no-resolve' for n in networks)+'\n'
-    manifestpath=ROOT/'notification-sources.json'; oldmanifest=manifestpath.read_text(encoding='utf-8')
-    reportpath=ROOT/'original-plus-validation.json'; oldreport=reportpath.read_text(encoding='utf-8')
+    manifestpath=ROOT/'notification-sources.json'; oldmanifest_bytes=manifestpath.read_bytes(); oldmanifest=oldmanifest_bytes.decode('utf-8')
+    reportpath=ROOT/'original-plus-validation.json'; oldreport_bytes=reportpath.read_bytes()
     try:
         p.write_text(updated,encoding='utf-8',newline='\n')
         manifest=json.loads(oldmanifest)
         manifest['telegram']={'url':URL,'sha256':hashlib.sha256(data).hexdigest(),'cidrs':[str(n) for n in networks]}
-        manifestpath.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        manifestpath.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
         validate(write=True)
     except Exception:
-        p.write_text(prior,encoding='utf-8',newline='\n')
-        manifestpath.write_text(oldmanifest,encoding='utf-8')
-        reportpath.write_text(oldreport,encoding='utf-8')
+        p.write_bytes(prior_bytes)
+        manifestpath.write_bytes(oldmanifest_bytes)
+        reportpath.write_bytes(oldreport_bytes)
         raise
     print('Official Telegram addresses synchronized; local template/groups were not touched')
 

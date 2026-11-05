@@ -1,12 +1,15 @@
 """Validate the local-template/remote-rule boundary and routing regressions."""
 from pathlib import Path
 import hashlib, ipaddress, json, re, sys
+from build_variants import expected_proxy
 
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/'
 
 def validate(write=False):
     source=(ROOT/'DailyRoute-OriginalPlus.conf').read_text(encoding='utf-8')
+    variant=(ROOT/'DailyRoute-APNs-Proxy.conf').read_text(encoding='utf-8')
+    assert variant==expected_proxy(source), 'APNs variant drifted: rebuild with scripts/build_variants.py'
     assert not re.search(r'^\s*update-url\s*=',source,re.M), 'Main template must not have a full-update URL'
     assert not any(x in source for x in ['[Script]','[MITM]','[Proxy]\n']), 'No credentials or interception in shared template'
     groupbody=source.split('[Proxy Group]\n',1)[1].split('[Rule]\n',1)[0]
@@ -34,7 +37,7 @@ def validate(write=False):
         assert re.fullmatch(r'rules/[a-z-]+\.list',relative),relative
         file=ROOT/relative; assert file.exists(),relative
         checked.add(relative)
-        data=file.read_bytes(); lines=data.decode('utf-8').splitlines(); count=0
+        data=file.read_text(encoding='utf-8').encode('utf-8'); lines=data.decode('utf-8').splitlines(); count=0
         for line in lines:
             if not line or line.startswith('#'): continue
             v=line.split(','); kind=v[0]
@@ -64,8 +67,8 @@ def validate(write=False):
     # Preserve higher-priority Apple Intelligence / Copilot exceptions as well.
     tests.update({'apple-relay.apple.com':'海外通用','copilot.microsoft.com':'海外通用'})
     for host,expected in tests.items(): assert match(host)==expected,(host,match(host),expected)
-    report.update(release='v1.2',rules=len(compiled)+2,groups=len(names),rule_sets=stats,domain_tests=tests,scope='Static rule/priority checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.',config_sha256=hashlib.sha256(source.encode()).hexdigest())
-    if write: reportpath.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    report.update(release='v1.3',rules=len(compiled)+2,groups=len(names),rule_sets=stats,domain_tests=tests,scope='Static rule/priority checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.',config_sha256=hashlib.sha256(source.encode()).hexdigest(),apns_proxy_variant_sha256=hashlib.sha256(variant.encode()).hexdigest(),variant_only_changes_apns_default=True)
+    if write: reportpath.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     print(f'OK: {len(stats)} remote sets, {len(compiled)+2} rules, {len(names)} local groups, {len(tests)} regression cases')
     return report
 

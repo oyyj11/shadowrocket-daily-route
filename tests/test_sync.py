@@ -14,7 +14,7 @@ class SyncSafety(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name)
         shutil.copytree(ROOT/'rules',self.root/'rules')
-        for f in ['DailyRoute-OriginalPlus.conf','notification-sources.json','original-plus-validation.json']:
+        for f in ['DailyRoute-OriginalPlus.conf','DailyRoute-APNs-Proxy.conf','notification-sources.json','original-plus-validation.json']:
             shutil.copyfile(ROOT/f,self.root/f)
         self.nodes=json.loads((self.root/'notification-sources.json').read_text(encoding='utf-8'))['telegram']['cidrs']
 

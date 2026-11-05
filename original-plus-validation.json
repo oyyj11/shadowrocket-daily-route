@@ -56,8 +56,8 @@
   "scope": "Static rule/priority checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.",
   "notification_update": "2026-11-05",
   "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery.",
-  "release": "v1.2",
-  "config_sha256": "f460e12946cc04137ac1a0593f5974f0f5dfca8df0091fe0c67ee358f51f1705",
+  "release": "v1.3",
+  "config_sha256": "3ad7e87d5bbaf13d74983403b1c3dc46813d598d25008831d0d3ad1f4d507981",
   "release_note": "本地个人节点组 + 远程规则集；一次迁移后只刷新规则，不覆盖组定义。",
   "rule_sets": [
     {
@@ -128,5 +128,7 @@
     }
   ],
   "migration_witnesses": 1375,
-  "migration_mismatches": []
+  "migration_mismatches": [],
+  "apns_proxy_variant_sha256": "7a51138c9ac81dd5a75a399b076cdb343df6d250b4078bc4ce4dcf65b07cefff",
+  "variant_only_changes_apns_default": true
 }

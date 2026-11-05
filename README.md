@@ -1,4 +1,4 @@
-# 轻舟分流 · DailyRoute v1.2
+# 轻舟分流 · DailyRoute v1.3
 
 **本地保存节点选择，远程同步规则。** Muse 已知请求走美国，ChatGPT 已知请求走日本；国内常用服务直连，普通海外可手动或自动选路。保留原系统 DNS、IPv6、QUIC 参数。
 
@@ -9,6 +9,31 @@ https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRout
 ```
 
 此地址是初始化模板，保持不变。日常同步的是模板引用的 `rules/*.list`，不是反复用整份模板覆盖手机个人设置。
+
+## APNs 双入口：按通知连接选择
+
+这里的苹果共享推送是 **Apple Push Notification service（APNs）**。两份模板共用同一套远程规则；差异仅是苹果推送组的默认选项和对应标识。Muse 美国、ChatGPT 日本、国内直连、YouTube 和更新流程一致。
+
+| 入口 | 苹果推送默认 | 建议 |
+|---|---|---|
+| DailyRoute-OriginalPlus.conf | DIRECT | 常规先用，沿用原固定 URL |
+| DailyRoute-APNs-Proxy.conf | PROXY，跟随首页节点 | 直连异常时对照，也可在苹果推送组选择稳定手动节点 |
+
+**APNs 默认直连版：**
+
+```text
+https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
+```
+
+**APNs 默认代理版：**
+
+```text
+https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf
+```
+
+选择其中一份下载，复制成本地配置并移除整份 update-url；想保留两个本地副本对照时，分别命名 APNs-Direct-Local.conf 和 APNs-Proxy-Local.conf，且各自确认美国/日本节点选择。已有本地副本也可直接切换“苹果推送”组，无需重新导入。
+
+这是**可被规则处理的 APNs 连接的默认策略**，不是强制接管所有 iOS 系统连接。原 bypass-system 等网络参数未改，系统旁路连接可能不受组选择影响。Apple 允许可达且不解密的代理承载其 443 回退连接；不能承诺代理比直连快，也不能因此保证通知即时送达。见 [Apple 官方说明](https://support.apple.com/en-vn/102266)。不要对 APNs 开启 HTTPS 解密。
 
 ## 必须做一次的迁移
 
@@ -46,7 +71,7 @@ GitHub 定时任务可能延迟；iOS 后台任务也不是准点保证。定时
 | App Store 下载 | PROXY，可切 DIRECT 比较 |
 | Telegram | 独立 Telegram 组，默认 PROXY |
 | X 等海外社交 / 流媒体 | 独立组，默认 PROXY，可切自动低延迟 |
-| Apple 共享推送 | 苹果推送，默认 DIRECT；系统连接可能旁路 |
+| Apple 共享推送 | 苹果推送，默认取决于所选入口；系统连接可能旁路 |
 | 国内常用服务和中国大陆 IP | DIRECT，使用当前 Wi-Fi/蜂窝网络 |
 
 名称筛选不证明实际出口国家；低延迟不代表视频吞吐量最高。地区组不提供其他地区回退，但未收录的新接口仍需检查连接记录。通知还依赖系统权限、专注模式和 App 内开关。
@@ -58,4 +83,4 @@ GitHub 定时任务可能延迟；iOS 后台任务也不是准点保证。定时
 - [规则脚本](scripts/)：Python 标准库；同步失败或校验不通过时不发布新的 Telegram 数据。
 - [通知官方数据来源](notification-sources.json) · [更新记录](CHANGELOG.md)
 
-当前 main 只有一份初始化 .conf；不包含节点账号、订阅密钥、证书或解密脚本。规则分类参考用户提供的 default.conf，操作语法参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)。静态和服务器 CI 校验不能代替手机实测、速度测试和平台资格核验。
+当前 main 保留 APNs 默认直连与默认代理两份初始化 .conf；不包含节点账号、订阅密钥、证书或解密脚本。规则分类参考用户提供的 default.conf，操作语法参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)。静态和服务器 CI 校验不能代替手机实测、速度测试和平台资格核验。
