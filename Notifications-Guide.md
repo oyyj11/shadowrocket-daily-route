@@ -1,6 +1,6 @@
 # Telegram、X 等应用：通知设置与验证
 
-适用于 v1.4 模板复制后的本地配置 `DailyRoute-Local.conf`。
+适用于 v1.5 模板复制后的本地配置 `DailyRoute-Local.conf`。
 
 ## 这次补充了什么
 
@@ -42,7 +42,7 @@ APNs 通道正常，有时能先收到通知，但打开 App 加载详情、下�
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
 ```
 
-已迁移到 v1.4 的用户，可用「使用配置」或「编译配置」刷新本地副本的规则集。首次迁移时，复制本地配置、移除整份更新地址，选择美国和台湾节点。规则集应成功 12/12。[完整迁移步骤](OriginalPlus-Guide.md)
+已迁移到 v1.5 的用户，可用「使用配置」或「编译配置」刷新本地副本的规则集。首次迁移时，复制本地配置、移除整份更新地址，选择美国和台湾节点。规则集应成功 12/12。[完整迁移步骤](OriginalPlus-Guide.md)
 
 在代理分组中确认：
 

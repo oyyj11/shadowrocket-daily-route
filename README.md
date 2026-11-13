@@ -1,6 +1,6 @@
-# 轻舟分流 · DailyRoute v1.4
+# 轻舟分流 · DailyRoute v1.5
 
-**本地保存节点选择，远程同步规则。** Muse 和 ChatGPT 各用一个美国节点组。OKX 官方主域名及子域名走台湾节点组。国内常用服务直连，普通海外流量可以手动或自动选路。
+**已识别的国内服务直连，海外和未识别的流量走代理。** Muse 和 ChatGPT 各用一个美国节点组，OKX 使用台湾节点组。本地保存节点选择，远程同步规则。
 
 ## 固定配置入口
 
@@ -35,9 +35,9 @@ https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRout
 
 这是**可被规则处理的 APNs 连接的默认策略**，不是强制接管所有 iOS 系统连接。原 bypass-system 等网络参数未改，系统旁路连接可能不受组选择影响。Apple 允许可达且不解密的代理承载其 443 回退连接；不能承诺代理比直连快，也不能因此保证通知即时送达。见 [Apple 官方说明](https://support.apple.com/en-vn/102266)。不要对 APNs 开启 HTTPS 解密。
 
-## 从旧版迁移到 v1.4
+## 从旧版迁移到 v1.5
 
-v1.4 新增了代理分组。使用本地副本的用户需要下载新模板并启用新副本，才能看到新的分组。规则集刷新只能更新已有规则集的内容。
+v1.5 删除了本地主配置中的中国大陆 IP 直连兜底，并取消 App Store 下载组的直连选项。使用旧本地副本的用户需下载新模板并启用新副本。规则集刷新只能更新远程规则内容。
 
 1. 记录当前 Muse、ChatGPT 和其他组的节点选择，备份个人配置。
 2. Shadowrocket → 配置 → ＋ → URL 填上方链接 → 下载。
@@ -71,19 +71,22 @@ GitHub 定时任务可能延迟；iOS 后台任务也不是准点保证。定时
 | ChatGPT/OpenAI | ChatGPT美国，首次选择美国节点 |
 | OKX | OKX台湾，首次选择台湾节点，覆盖 `okx.com` 及其子域名 |
 | YouTube | PROXY，优先沿用原来流畅的首页节点，可切自动低延迟 |
-| App Store 下载 | PROXY，可切 DIRECT 比较 |
+| App Store 下载 | PROXY，可选择其他代理节点 |
 | Telegram | 独立 Telegram 组，默认 PROXY |
 | X 等海外社交 / 流媒体 | 独立组，默认 PROXY，可切自动低延迟 |
 | Apple 共享推送 | 苹果推送，默认取决于所选入口；系统连接可能旁路 |
-| 国内常用服务和中国大陆 IP | DIRECT，使用当前 Wi-Fi/蜂窝网络 |
+| 已识别的国内服务、局域网 | DIRECT，使用当前 Wi-Fi 或蜂窝网络 |
+| 海外服务、未识别的流量 | 使用对应代理组，未匹配请求走「海外通用」 |
 
 名称筛选不证明实际出口国家；低延迟不代表视频吞吐量最高。地区组不提供其他地区回退，但未收录的新接口仍需检查连接记录。通知还依赖系统权限、专注模式和 App 内开关。
+
+Shadowrocket 根据连接的目标域名和 IP 匹配规则。国内 App 调用未收录的服务器时，该连接会进入代理兜底。APNs 是系统共用的通知连接，按所选模板中的苹果推送策略处理。[Shadowrocket 分流说明](https://github.com/LOWERTOP/Shadowrocket#app分流)
 
 微信视频期间如果国内网站可访问，只有代理 App 卡住，请按使用说明在通话前、通话中、挂断后对比同一代理 App 和节点。[微信视频通话排查](OriginalPlus-Guide.md#8-微信视频通话期间代理-app-卡住)
 
 ## 验证和目录
 
-- [original-plus-validation.json](original-plus-validation.json) 记录 731 条规则、12 个本地分组、12 个远程规则集和 50 项域名/IP 检查。
+- [original-plus-validation.json](original-plus-validation.json) 记录 668 条规则、12 个本地分组、12 个远程规则集和 61 项域名/IP 检查。
 - [GitHub Actions](https://github.com/oyyj11/shadowrocket-daily-route/actions)：push/PR 校验，定时和手动同步。
 - [规则脚本](scripts/)：Python 标准库；同步失败或校验不通过时不发布新的 Telegram 数据。
 - [通知官方数据来源](notification-sources.json) · [更新记录](CHANGELOG.md)

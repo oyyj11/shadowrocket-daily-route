@@ -61,7 +61,7 @@ python scripts/sync_telegram.py
 
 ## 规则优先级与本地设置
 
-苹果推送、Telegram、Muse、ChatGPT、OKX、YouTube、App Store、流媒体、社交、海外优先例外、国内、其余海外按模板顺序匹配，最后是中国大陆 GEOIP 直连和海外默认兜底。
+苹果推送、Telegram、Muse、ChatGPT、OKX、YouTube、App Store、流媒体、社交、海外优先例外、国内、其余海外按模板顺序匹配。直连集收录明确的国内服务和局域网地址。未匹配的连接由 FINAL 交给「海外通用」。
 
 本地副本的 RULE-SET 顺序不要随意调整。公共列表没有分组默认值，因此日常列表更新不会把 Muse/ChatGPT 改回 REJECT；节点订阅删除或改名、用户手动覆盖整个模板仍可能需要重新选择。
 

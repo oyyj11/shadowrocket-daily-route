@@ -1,8 +1,6 @@
 {
   "base_sha256": "752b299faeddb81118c305056d4f25d6f8f6964ecd08043070e20939555a814f",
-  "rules": 731,
-  "base_rules_preserved": 612,
-  "new_rules": null,
+  "rules": 668,
   "groups": 12,
   "general_unchanged": true,
   "host_and_rewrite_unchanged": true,
@@ -44,7 +42,18 @@
     "api.deepseek.com": "DIRECT",
     "www.kimi.com": "DIRECT",
     "www.icbc.com.cn": "DIRECT",
-    "www.apple.com": "DIRECT",
+    "www.apple.com": "海外通用",
+    "www.apple.com.cn": "海外通用",
+    "www.icloud.com": "海外通用",
+    "store.steampowered.com": "海外通用",
+    "www.paypal.com": "海外通用",
+    "outlook.office365.com": "海外通用",
+    "download.jetbrains.com": "海外通用",
+    "unlisted-service.invalid": "海外通用",
+    "unlisted-service.cn": "海外通用",
+    "192.168.1.1": "DIRECT",
+    "mmbiz.qpic.cn": "DIRECT",
+    "wx.qlogo.cn": "DIRECT",
     "courier.push.apple.com": "苹果推送",
     "17.249.0.1": "苹果推送",
     "2620:149:a44::1": "苹果推送",
@@ -63,8 +72,8 @@
   "scope": "Static rule/priority checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.",
   "notification_update": "2026-11-05",
   "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery.",
-  "release": "v1.4",
-  "config_sha256": "daacb3e27ba5ec24f3c00e5486e8d82e209faab5183d8e5de1a9c563a56f5a04",
+  "release": "v1.5",
+  "config_sha256": "9ecd977b5933328698f11978d63a457849eddc8cef0d4872a150aeb6c6c62e7f",
   "release_note": "本地个人节点组 + 远程规则集；一次迁移后只刷新规则，不覆盖组定义。",
   "rule_sets": [
     {
@@ -124,14 +133,14 @@
     {
       "file": "rules/overseas-exceptions.list",
       "policy": "海外通用",
-      "rules": 7,
-      "sha256": "96644f23f745e63fe1b72c914a69c1475b2a324c34056940520c90762631f6a9"
+      "rules": 114,
+      "sha256": "759faf1351ec0b9b2f24a764df8516dbe92bae334d97624f22dc0aa9c1e555bf"
     },
     {
       "file": "rules/direct.list",
       "policy": "DIRECT",
-      "rules": 388,
-      "sha256": "9d0825ab7b23baffc35b322a9e0a69d845b6c7ce171cf2c01533c3dee72136ac"
+      "rules": 219,
+      "sha256": "17077938ce077788d75950f8705651be4b0a5e44929065a51df8f75f7aa9f366"
     },
     {
       "file": "rules/overseas.list",
@@ -142,6 +151,6 @@
   ],
   "migration_witnesses": 1375,
   "migration_mismatches": [],
-  "apns_proxy_variant_sha256": "02828272fc64c954805e83607e67cceb28f4e9ae5e0d2d67f0277ac970ecffb7",
+  "apns_proxy_variant_sha256": "37ef1008fadfebe07e5efb6a9a3a111a1cce79861fc858629395cf32bccb40a6",
   "variant_only_changes_apns_default": true
 }

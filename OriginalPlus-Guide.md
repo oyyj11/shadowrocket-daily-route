@@ -1,6 +1,6 @@
-# DailyRoute v1.4 迁移和使用说明
+# DailyRoute v1.5 迁移和使用说明
 
-v1.4 将 ChatGPT 改到美国，增加 OKX 台湾分组，并补充微信直连域名。使用旧本地副本的用户需下载新模板并重新选择节点。后续规则集刷新会沿用本地分组。
+v1.5 将直连范围收紧到已识别的国内服务和局域网。海外及未识别的流量走代理，App Store 下载组仅提供代理选项。使用旧本地副本的用户需下载新模板并重新选择节点，才能更新本地兜底和组定义。后续规则集刷新会沿用本地分组。
 
 ## 0. 先选择 APNs 默认直连或默认代理
 
@@ -10,7 +10,7 @@ APNs 即 Apple Push Notification service。常规入口 DailyRoute-OriginalPlus.
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf
 ```
 
-两份 v1.4 模板共用规则集，安装步骤相同。此前代理版导入时遇到中断的用户，可以先使用已能正常导入的 APNs 默认直连版。
+两份 v1.5 模板共用规则集，安装步骤相同。此前代理版导入时遇到中断的用户，可以先使用已能正常导入的 APNs 默认直连版。
 
 ## 1. 下载模板并复制成本地配置
 
@@ -85,13 +85,13 @@ iOS 后台调度不保证准点；重启手机、强制结束 App 等可能影�
 
 ## 6. 其他应用、速度和自动选路
 
-YouTube、App Store、Telegram、海外社交、海外流媒体、海外通用默认 PROXY，跟随首页具体节点。苹果推送默认值取决于所选模板（直连版 DIRECT，代理版 PROXY）。国内已知域名及中国大陆 IP 为 DIRECT。
+YouTube、App Store、Telegram、海外社交、海外流媒体、海外通用默认 PROXY，跟随首页具体节点。苹果推送默认值取决于所选模板（直连版 DIRECT，代理版 PROXY）。国内直连依据已收录的服务域名，局域网地址也走直连。其余流量默认走代理。
 
 YouTube 先使用原配置下流畅的同一个首页节点；要试自动选择，在 YouTube 组单独选“自动低延迟”。海外通用、社交、流媒体也需要各自选择，并不互相跟随。自动组每 900 秒比较测试地址延迟，公差 150；它不检测视频带宽、解锁或账号资格。
 
 “手动节点”是共用组，多个应用都选择它时，改它会同时影响这些应用。需要独立线路时，在相应应用组添加并选择具体节点。
 
-YouTube 慢：固定同一网络、视频、清晰度，比较 PROXY 和自动组；看 googlevideo.com 实际命中、缓冲和连接速度。App Store 慢：在 AppStore下载 组比较 PROXY 与 DIRECT，暂停/继续同一下载观察进度。
+YouTube 慢时，固定网络、视频和清晰度，比较 PROXY 和自动组，并查看 googlevideo.com 的实际命中、缓冲和连接速度。App Store 下载慢时，在 AppStore下载 组换一个代理节点，暂停再继续同一个下载，观察进度。
 
 若短时全局代理也慢，优先检查节点吞吐量、拥堵、Wi-Fi/蜂窝和目标服务器。全局代理对照只用于测速，结束后切回配置，再使用 Muse/ChatGPT。
 
@@ -113,10 +113,11 @@ YouTube 慢：固定同一网络、视频、清晰度，比较 PROXY 和自动�
 | api.x.com / t.co | 海外社交 |
 | courier.push.apple.com | 苹果推送 |
 | www.jd.com / www.bilibili.com / www.douyin.com | DIRECT |
+| store.steampowered.com / www.paypal.com / www.icloud.com | 海外通用 |
 
 测试显示的是组名，实际节点要在组里看。再打开 App，在数据连接记录核对真实请求。未知新接口可能仍走海外通用，应提供失败域名补充；不能只测主页就认为所有接口都覆盖。
 
-国内直连使用手机当前 Wi-Fi 或蜂窝，不经过代理服务器。它不强制蜂窝、不减免流量费，VPN 图标也不表示所有流量都经过远程代理。
+国内直连使用手机当前的 Wi-Fi 或蜂窝。连接按域名和 IP 匹配。同一个 App 使用第三方服务或未知域名时，个别连接可能命中其他策略。用连接记录查看实际出口。[Shadowrocket 分流说明](https://github.com/LOWERTOP/Shadowrocket#app分流)
 
 ## 8. 微信视频通话期间代理 App 卡住
 
@@ -146,6 +147,6 @@ YouTube 慢：固定同一网络、视频、清晰度，比较 PROXY 和自动�
 
 ## 10. 本版验证范围
 
-CI 检查格式、网段、策略引用和组循环，并验证美国及台湾节点名称筛选和 50 项域名/IP 分类。每天同步 Telegram 官方 IP 前后均执行校验。[验证报告](original-plus-validation.json)
+CI 检查格式、网段、策略引用和组循环，并验证美国及台湾节点名称筛选和 61 项域名/IP 分类。每天同步 Telegram 官方 IP 前后均执行校验。[验证报告](original-plus-validation.json)
 
 尚未在用户手机验证完整接口、速度、推送送达、出口国家，以及所有客户端版本的后台行为。完成首次本地迁移后，仍要实际测试一次刷新前后的节点选择。
