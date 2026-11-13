@@ -1,6 +1,6 @@
-# 轻舟分流 · DailyRoute v1.5
+# 轻舟分流 · DailyRoute v1.6
 
-**已识别的国内服务直连，海外和未识别的流量走代理。** Muse 和 ChatGPT 各用一个美国节点组，OKX 使用台湾节点组。本地保存节点选择，远程同步规则。
+**已识别的国内服务直连，海外和未识别的流量走代理。** Muse 和 ChatGPT 各用一个美国节点组，OKX 使用台湾节点组。Shadowrocket 可以从固定地址更新主配置和规则集。
 
 ## 固定配置入口
 
@@ -8,7 +8,7 @@
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
 ```
 
-此地址是初始化模板，保持不变。日常同步的是模板引用的 `rules/*.list`，不是反复用整份模板覆盖手机个人设置。
+从此地址导入后，配置内的 `update-url` 会指向同一份文件。主配置和引用的 `rules/*.list` 都可更新。
 
 ## APNs 双入口：按通知连接选择
 
@@ -31,24 +31,20 @@ https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRout
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf
 ```
 
-选择其中一份下载，复制成本地配置并移除整份更新地址。想同时保留两个副本时，分别命名 APNs-Direct-Local.conf 和 APNs-Proxy-Local.conf，并在各副本选择对应的美国和台湾节点。
+选择其中一份导入并启用。两版各有自己的更新地址，分别拉取对应配置。
 
 这是**可被规则处理的 APNs 连接的默认策略**，不是强制接管所有 iOS 系统连接。原 bypass-system 等网络参数未改，系统旁路连接可能不受组选择影响。Apple 允许可达且不解密的代理承载其 443 回退连接；不能承诺代理比直连快，也不能因此保证通知即时送达。见 [Apple 官方说明](https://support.apple.com/en-vn/102266)。不要对 APNs 开启 HTTPS 解密。
 
-## 从旧版迁移到 v1.5
+## 导入和自动更新
 
-v1.5 删除了本地主配置中的中国大陆 IP 直连兜底，并取消 App Store 下载组的直连选项。使用旧本地副本的用户需下载新模板并启用新副本。规则集刷新只能更新远程规则内容。
+旧版曾建议删除更新地址。此前照做的用户，需要重新导入一次对应链接并启用新版，或在当前配置的 `[General]` 恢复对应的 `update-url` 后执行「更新配置」。
 
-1. 记录当前 Muse、ChatGPT 和其他组的节点选择，备份个人配置。
-2. Shadowrocket → 配置 → ＋ → URL 填上方链接 → 下载。
-3. 点击下载的文件 → 编辑配置 → 复制（具体菜单随版本变化），将副本命名为 **DailyRoute-Local.conf**。这里使用“复制”，不选“扩展配置”。
-4. 编辑副本的纯文本，在 `[General]` 中删除应用自动添加的 `update-url = ...`（若没有就不用删）；保留所有 RULE-SET 行。确认副本不再有整份配置更新地址。
-5. 点击 **DailyRoute-Local.conf → 使用配置**，确认 ✓ 在副本旁，首页全局路由选 **配置**。
-6. 在 Muse美国、ChatGPT美国中分别选美国节点，在 OKX台湾中选台湾节点。新分组初始为 REJECT，选好节点后才会连接。
-7. 在配置的“规则集 URL”页确认成功 **12/12**。先测试基本连接，再开启后台更新。
-8. Shadowrocket 设置 → 配置 → 自动后台更新，选择可用间隔（例如 1 天）；iPhone 设置 → 通用 → 后台 App 刷新，允许 Shadowrocket。不要把“节点订阅更新”当作规则更新。
+1. 在 Shadowrocket 的「配置」页用右上角「＋」下载对应链接，点击「使用配置」。首页全局路由选「配置」。
+2. 检查「规则集 URL」下载成功 12/12，在 Muse美国、ChatGPT美国和 OKX台湾分别选相应地区的节点。
+3. 在 Shadowrocket「设置 → 配置」开启「自动后台更新」，选择更新间隔。在 iPhone「设置 → 通用 → 后台 App 刷新」允许 Shadowrocket 后台刷新。
+4. 需要立即拉取时，点配置文件名，再选「更新配置」。整份更新可能覆盖本地编辑和分组选项。若地区组回到 REJECT，重新选择节点。
 
-以后只刷新远程规则集，本地组定义、节点选择和网络参数不在公共规则文件里，不会被远程规则覆盖。不要再对已经设置好的本地副本执行“从服务器整份更新配置”。
+需要优先保留手机上的自定义配置时，可以使用不含 `update-url` 的本地副本，继续按原方式刷新规则集。
 
 **[完整迁移与使用步骤](OriginalPlus-Guide.md) · [自动同步和共同维护](AUTOMATION.md) · [通知指南](Notifications-Guide.md)**
 
@@ -56,10 +52,11 @@ v1.5 删除了本地主配置中的中国大陆 IP 直连兜底，并取消 App 
 
 | 环节 | 实现 |
 |---|---|
-| 你和朋友维护规则 | 编辑对应 rules/*.list，合并到 main，固定规则 URL 即更新 |
+| 你和朋友维护配置 | 编辑 `DailyRoute-OriginalPlus.conf` 或对应的 `rules/*.list`，提交到 main |
+| APNs 代理版 | GitHub Actions 校验后从直连版生成并发布 |
 | GitHub 定时同步 | 每天北京时间 11:17 尝试同步 Telegram 官方 IP，校验通过才提交，有变更才产生提交 |
-| 手机定期更新 | Shadowrocket 配置后台更新，刷新当前本地主配置引用的规则集 |
-| 个人节点设置 | 只留在各自手机本地副本，首次选择后无需因公共规则更新反复重选 |
+| 手机定期更新 | Shadowrocket 从所选版本的 `update-url` 拉取主配置，再刷新规则集 |
+| 个人节点设置 | 整份更新后核对分组。只刷新规则集时继续使用本地副本 |
 
 GitHub 定时任务可能延迟；iOS 后台任务也不是准点保证。定时同步目前只自动拉取 Telegram 官方地址，其他服务域名由维护者审核修改；没有重新引入旧大规则合集。
 
@@ -91,4 +88,4 @@ Shadowrocket 根据连接的目标域名和 IP 匹配规则。国内 App 调用�
 - [规则脚本](scripts/)：Python 标准库；同步失败或校验不通过时不发布新的 Telegram 数据。
 - [通知官方数据来源](notification-sources.json) · [更新记录](CHANGELOG.md)
 
-当前 main 保留 APNs 默认直连与默认代理两份初始化 .conf；不包含节点账号、订阅密钥、证书或解密脚本。规则分类参考用户提供的 default.conf，操作语法参考 [LOWERTOP/Shadowrocket 非官方社区手册](https://github.com/LOWERTOP/Shadowrocket)。静态和服务器 CI 校验不能代替手机实测、速度测试和平台资格核验。
+仓库提供 APNs 默认直连与默认代理两份可更新配置。规则分类参考用户提供的 default.conf。更新设置参考 Shadowrocket 社区手册，具体菜单及后台更新时间以手机为准。[自动更新说明](https://github.com/LOWERTOP/Shadowrocket#自动更新)

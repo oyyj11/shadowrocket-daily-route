@@ -69,11 +69,11 @@
     "apple-relay.apple.com": "海外通用",
     "copilot.microsoft.com": "海外通用"
   },
-  "scope": "Static rule/priority checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.",
+  "scope": "Static rule/priority and update URL checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.",
   "notification_update": "2026-11-05",
   "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery.",
-  "release": "v1.5",
-  "config_sha256": "9ecd977b5933328698f11978d63a457849eddc8cef0d4872a150aeb6c6c62e7f",
+  "release": "v1.6",
+  "config_sha256": "5518580588dd6f9384347eae9f4dc695cdc4fe6fec2e754726d922ae7f3cf6e8",
   "release_note": "本地个人节点组 + 远程规则集；一次迁移后只刷新规则，不覆盖组定义。",
   "rule_sets": [
     {
@@ -151,6 +151,13 @@
   ],
   "migration_witnesses": 1375,
   "migration_mismatches": [],
-  "apns_proxy_variant_sha256": "37ef1008fadfebe07e5efb6a9a3a111a1cce79861fc858629395cf32bccb40a6",
-  "variant_only_changes_apns_default": true
+  "apns_proxy_variant_sha256": "97b50803221b1796532d2d2ed107f4d71b3301aeb82f7ff7a2c31c46fd8aa3c2",
+  "profile_update_urls": {
+    "DailyRoute-OriginalPlus.conf": "https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf",
+    "DailyRoute-APNs-Proxy.conf": "https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf"
+  },
+  "variant_changes": [
+    "APNs default",
+    "profile update URL"
+  ]
 }

@@ -2,8 +2,8 @@
 
 ## 两条自动流程
 
-1. **GitHub 端**：每日北京时间 11:17（UTC 03:17）触发 Telegram 官方 IP 同步。计划任务可能延迟；也可在 Actions 页面选“Validate and sync shared rules → Run workflow”手动运行。
-2. **手机端**：当前启用不含 update-url 的本地副本，开启 Shadowrocket 配置后台更新，定期拉取远程 RULE-SET。iOS 决定实际调度时间，不保证准点。
+1. **GitHub 端**每日北京时间 11:17（UTC 03:17）同步 Telegram 官方 IP。也可在 Actions 页面选「Validate, publish and sync configuration → Run workflow」手动运行。
+2. **手机端**启用含 `update-url` 的对应版本，并开启 Shadowrocket 的配置后台更新，定期拉取主配置和规则集。iOS 决定实际调度时间。
 
 这两条都需要配置，GitHub 自动更新不会直接操作手机。具体手机步骤见 [使用说明](OriginalPlus-Guide.md)。
 
@@ -35,13 +35,13 @@ DOMAIN-SUFFIX,example.com
 ## 共同维护流程
 
 1. 各自使用自己的 GitHub 账号；仓库协作者权限用于修改本仓库，不需要共用登录密码。
-2. 修改对应规则文件，在新分支提交 Pull Request。
-3. 等待 validate 检查通过，查看规则归类和优先级是否合理，再合并 main。
-4. 用户手机下次规则刷新时获得变化，不需要换 URL。
+2. 修改对应规则文件或基础配置 `DailyRoute-OriginalPlus.conf`，在新分支提交 Pull Request。
+3. 等待 validate 检查通过，再合并 main。GitHub Actions 校验后生成并发布 APNs 代理版和验证报告。
+4. 手机下次执行配置更新时从各自的固定 URL 获得改动。
 
 本仓库没有强制分支保护，直接提交 main 会先改变公开规则，然后触发 CI；因此共同维护时应走 PR。定时机器人则在本地完整校验成功后才推送更新。
 
-需要新增分组时，不仅要改规则，还要设计新的本地主配置迁移。日常尽量复用现有组，避免让所有用户反复设置节点。
+新增分组或调整通用参数时，修改基础配置。使用整份更新的手机可以拉取这类改动。继续使用本地副本的用户只会收到已有规则集的变化。
 
 ## 脚本与失败处理
 
@@ -53,7 +53,7 @@ python scripts/validate.py --write-report
 python scripts/sync_telegram.py
 ```
 
-只需 Python 标准库。同步只从 Telegram 官方 `https://core.telegram.org/resources/cidr.txt` 拉取，验证网段格式、数量范围、公网属性及完整回归。下载或验证失败时退出，保留已发布文件；有实际变化才提交。不会写主配置或节点组，也不会重新引入旧版大规则集。
+脚本使用 Python 标准库。定时同步从 Telegram 官方地址拉取 IP，验证网段、数量、公网属性及回归检查。有实际变更且通过校验才提交。
 
 自动同步目前仅涵盖 Telegram 官方地址；Muse、ChatGPT、YouTube、X、国内域名和 Apple 地址由维护者核查后更新。不能把它理解为自动发现全部 App 新接口。
 
@@ -74,4 +74,4 @@ python scripts/sync_telegram.py
 
 ## APNs 变体维护
 
-基础模板为 DailyRoute-OriginalPlus.conf（默认直连）。修改主模板后运行 `python scripts/build_variants.py` 生成 DailyRoute-APNs-Proxy.conf。CI 严格比较两份文件，只允许苹果推送默认选项和 APNs 模式注释不同。两者共用 rules/*.list，定时同步不复制出两套规则，也不改个人副本。
+维护入口是 `DailyRoute-OriginalPlus.conf`。合并到 main 后，GitHub Actions 自动生成代理版，设置其专用更新地址，并在内容变化时提交。需要在本地查看生成结果时，运行 `python scripts/build_variants.py`，再运行 `python scripts/validate.py`。两份配置共用 `rules/*.list`。
