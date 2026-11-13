@@ -1,8 +1,8 @@
 {
   "base_sha256": "752b299faeddb81118c305056d4f25d6f8f6964ecd08043070e20939555a814f",
-  "rules": 669,
+  "rules": 672,
   "groups": 12,
-  "general_unchanged": true,
+  "general_unchanged": false,
   "host_and_rewrite_unchanged": true,
   "no_country_group_fallback": true,
   "country_group_initial_policy": "REJECT，需用户选择实际地区节点",
@@ -67,14 +67,16 @@
     "api.twitter.com": "海外社交",
     "t.co": "海外社交",
     "apple-relay.apple.com": "海外通用",
-    "copilot.microsoft.com": "海外通用"
+    "copilot.microsoft.com": "海外通用",
+    "test.myqcloud.com": "DIRECT",
+    "test.tencent-cloud.net": "DIRECT"
   },
   "scope": "Static rule/priority and update URL checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.",
   "notification_update": "2026-11-05",
   "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery.",
-  "release": "v1.6",
-  "config_sha256": "5518580588dd6f9384347eae9f4dc695cdc4fe6fec2e754726d922ae7f3cf6e8",
-  "release_note": "本地个人节点组 + 远程规则集；一次迁移后只刷新规则，不覆盖组定义。",
+  "release": "v1.6.1",
+  "config_sha256": "4b051304a84c4271812006e3d3e65fae2b7479dfc4474327406b9744ac337900",
+  "release_note": "恢复 v1.4 大陆 IP 兜底及腾讯云直连，保留地区分组和整份更新。",
   "rule_sets": [
     {
       "file": "rules/apple-push.list",
@@ -139,8 +141,8 @@
     {
       "file": "rules/direct.list",
       "policy": "DIRECT",
-      "rules": 220,
-      "sha256": "ce85e803a1a95bd386204621fe83982e6fde81209a18ff4eff6773bafc1db15c"
+      "rules": 222,
+      "sha256": "35b9e54d75c0433e182f9d40a15c73fd09564fd347d1b202fed1faf1ddfc8544"
     },
     {
       "file": "rules/overseas.list",
@@ -151,7 +153,7 @@
   ],
   "migration_witnesses": 1375,
   "migration_mismatches": [],
-  "apns_proxy_variant_sha256": "97b50803221b1796532d2d2ed107f4d71b3301aeb82f7ff7a2c31c46fd8aa3c2",
+  "apns_proxy_variant_sha256": "1a71a098e27e239595e03437db5930e1f473cf14672fd3dfba419ffa8a997a65",
   "profile_update_urls": {
     "DailyRoute-OriginalPlus.conf": "https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf",
     "DailyRoute-APNs-Proxy.conf": "https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf"
@@ -159,5 +161,6 @@
   "variant_changes": [
     "APNs default",
     "profile update URL"
-  ]
+  ],
+  "geoip_test_note": "Country labels injected for precedence checks only; actual Shadowrocket GeoIP database and runtime unverified."
 }

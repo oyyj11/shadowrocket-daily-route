@@ -1,6 +1,6 @@
 # Telegram、X 等应用：通知设置与验证
 
-适用于 v1.6 的 APNs 直连版和代理版。
+适用于 v1.6.1 的 APNs 直连版和代理版。
 
 ## 这次补充了什么
 
@@ -42,7 +42,7 @@ APNs 通道正常，有时能先收到通知，但打开 App 加载详情、下�
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
 ```
 
-v1.6 含对应版本的更新地址。点击配置文件名并选「更新配置」，即可拉取新版。只刷新规则集时，使用「编译配置」。整份更新后请检查美国和台湾节点的选择以及规则集下载状态。[完整更新步骤](OriginalPlus-Guide.md)
+v1.6.1 含对应版本的更新地址。点击配置文件名并选「更新配置」，即可拉取新版。只刷新规则集时，使用「编译配置」。整份更新后请检查美国和台湾节点的选择以及规则集下载状态。[完整更新步骤](OriginalPlus-Guide.md)
 
 在代理分组中确认：
 

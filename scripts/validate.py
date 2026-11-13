@@ -48,9 +48,9 @@ def validate(write=False):
         for child in edges[node]: visit(child,stack+[node])
     for node in names: visit(node,[])
     main=[l.split(',') for l in source.split('[Rule]\n',1)[1].split('[Host]\n',1)[0].splitlines() if l and not l.startswith('#')]
-    assert main[-1:]==[['FINAL','海外通用']]
+    assert main[-2:]==[['GEOIP','CN','DIRECT'], ['FINAL','海外通用']], 'Restore mainland IP fallback after explicit service rules'
     compiled=[]; stats=[]; checked=set()
-    for p in main[:-1]:
+    for p in main[:-2]:
         assert len(p)==3 and p[0]=='RULE-SET' and p[1].startswith(BASE+'rules/') and p[2] in names|{'DIRECT'},p
         relative=p[1][len(BASE):]
         assert re.fullmatch(r'rules/[a-z-]+\.list',relative),relative
@@ -70,17 +70,24 @@ def validate(write=False):
         stats.append({'file':relative,'policy':p[2],'rules':count,'sha256':hashlib.sha256(data).hexdigest()})
     assert checked=={str(p.relative_to(ROOT)).replace('\\','/') for p in (ROOT/'rules').glob('*.list')},'Unreferenced or missing rule set'
     assert ['IP-ASN', '132203', 'DIRECT', 'no-resolve'] in compiled, 'Tencent QQ/WeChat IP direct rule is missing'
-    def match(host):
+    compiled.append(['GEOIP', 'CN', 'DIRECT'])
+    def match(host, country=None):
         try: addr=ipaddress.ip_address(host)
         except ValueError: addr=None
         for p in compiled:
             k=p[0]
+            if k=='GEOIP' and country==p[1]: return p[2]
             if addr is None:
                 if k=='DOMAIN' and host==p[1] or k=='DOMAIN-SUFFIX' and (host==p[1] or host.endswith('.'+p[1])) or k=='DOMAIN-KEYWORD' and p[1] in host: return p[2]
             elif k=='IP-CIDR':
                 n=ipaddress.ip_network(p[1])
                 if addr.version==n.version and addr in n: return p[2]
         return '海外通用'
+    # Inject country labels to test precedence, not a claim about real IP geolocation.
+    assert match('203.0.113.25', country='CN') == 'DIRECT'
+    assert match('203.0.113.25', country='US') == '海外通用'
+    for host, policy in [('chatgpt.com','ChatGPT美国'), ('muse.ai','Muse美国'), ('www.okx.com','OKX台湾'), ('www.youtube.com','YouTube'), ('api.telegram.org','Telegram')]:
+        assert match(host, country='CN') == policy, (host, 'GEOIP must not override service rules')
     reportpath=ROOT/'original-plus-validation.json'
     report=json.loads(reportpath.read_text(encoding='utf-8'))
     tests=report['domain_tests']
