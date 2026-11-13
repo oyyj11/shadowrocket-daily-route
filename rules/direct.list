@@ -215,6 +215,9 @@ DOMAIN,apd-pcdnwxlogin.teg.tencent-cloud.net
 DOMAIN,apd-pcdnwxnat.teg.tencent-cloud.net
 DOMAIN-SUFFIX,qpic.cn
 DOMAIN-SUFFIX,qlogo.cn
+# Tencent Global (QQ/WeChat) for connections to IP addresses.
+# https://www.peeringdb.com/asn/132203
+IP-ASN,132203,no-resolve
 DOMAIN,file-igamecj.akamaized.net
 # Local network addresses.
 IP-CIDR,192.168.0.0/16,no-resolve

@@ -1,6 +1,6 @@
 {
   "base_sha256": "752b299faeddb81118c305056d4f25d6f8f6964ecd08043070e20939555a814f",
-  "rules": 668,
+  "rules": 669,
   "groups": 12,
   "general_unchanged": true,
   "host_and_rewrite_unchanged": true,
@@ -139,8 +139,8 @@
     {
       "file": "rules/direct.list",
       "policy": "DIRECT",
-      "rules": 219,
-      "sha256": "17077938ce077788d75950f8705651be4b0a5e44929065a51df8f75f7aa9f366"
+      "rules": 220,
+      "sha256": "ce85e803a1a95bd386204621fe83982e6fde81209a18ff4eff6773bafc1db15c"
     },
     {
       "file": "rules/overseas.list",

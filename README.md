@@ -86,7 +86,7 @@ Shadowrocket 根据连接的目标域名和 IP 匹配规则。国内 App 调用�
 
 ## 验证和目录
 
-- [original-plus-validation.json](original-plus-validation.json) 记录 668 条规则、12 个本地分组、12 个远程规则集和 61 项域名/IP 检查。
+- [original-plus-validation.json](original-plus-validation.json) 记录 669 条规则、12 个本地分组、12 个远程规则集和 61 项域名/IP 检查。校验同时检查腾讯 QQ/微信网络的直连规则是否存在。
 - [GitHub Actions](https://github.com/oyyj11/shadowrocket-daily-route/actions)：push/PR 校验，定时和手动同步。
 - [规则脚本](scripts/)：Python 标准库；同步失败或校验不通过时不发布新的 Telegram 数据。
 - [通知官方数据来源](notification-sources.json) · [更新记录](CHANGELOG.md)

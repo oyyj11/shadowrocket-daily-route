@@ -63,6 +63,7 @@ def validate(write=False):
         assert count>0,relative
         stats.append({'file':relative,'policy':p[2],'rules':count,'sha256':hashlib.sha256(data).hexdigest()})
     assert checked=={str(p.relative_to(ROOT)).replace('\\','/') for p in (ROOT/'rules').glob('*.list')},'Unreferenced or missing rule set'
+    assert ['IP-ASN', '132203', 'DIRECT', 'no-resolve'] in compiled, 'Tencent QQ/WeChat IP direct rule is missing'
     def match(host):
         try: addr=ipaddress.ip_address(host)
         except ValueError: addr=None
