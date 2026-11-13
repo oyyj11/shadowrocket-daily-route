@@ -1,4 +1,5 @@
-# DailyRoute shared rules: chatgpt-jp
+# DailyRoute shared rules: ChatGPT and OpenAI
+# The historical filename is retained for existing URLs. The local policy group selects the exit.
 # Policy belongs to the LOCAL main configuration. No nodes or credentials here.
 DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,chat.com

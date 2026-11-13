@@ -1,6 +1,6 @@
-# 轻舟分流 · DailyRoute v1.3
+# 轻舟分流 · DailyRoute v1.4
 
-**本地保存节点选择，远程同步规则。** Muse 已知请求走美国，ChatGPT 已知请求走日本；国内常用服务直连，普通海外可手动或自动选路。保留原系统 DNS、IPv6、QUIC 参数。
+**本地保存节点选择，远程同步规则。** Muse 和 ChatGPT 各用一个美国节点组。OKX 官方主域名及子域名走台湾节点组。国内常用服务直连，普通海外流量可以手动或自动选路。
 
 ## 固定配置入口
 
@@ -12,7 +12,7 @@ https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRout
 
 ## APNs 双入口：按通知连接选择
 
-这里的苹果共享推送是 **Apple Push Notification service（APNs）**。两份模板共用同一套远程规则；差异仅是苹果推送组的默认选项和对应标识。Muse 美国、ChatGPT 日本、国内直连、YouTube 和更新流程一致。
+这里的苹果共享推送是 **Apple Push Notification service（APNs）**。两份模板共用同一套远程规则，区别是苹果推送组的默认选项。
 
 | 入口 | 苹果推送默认 | 建议 |
 |---|---|---|
@@ -31,19 +31,21 @@ https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRout
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf
 ```
 
-选择其中一份下载，复制成本地配置并移除整份 update-url；想保留两个本地副本对照时，分别命名 APNs-Direct-Local.conf 和 APNs-Proxy-Local.conf，且各自确认美国/日本节点选择。已有本地副本也可直接切换“苹果推送”组，无需重新导入。
+选择其中一份下载，复制成本地配置并移除整份更新地址。想同时保留两个副本时，分别命名 APNs-Direct-Local.conf 和 APNs-Proxy-Local.conf，并在各副本选择对应的美国和台湾节点。
 
 这是**可被规则处理的 APNs 连接的默认策略**，不是强制接管所有 iOS 系统连接。原 bypass-system 等网络参数未改，系统旁路连接可能不受组选择影响。Apple 允许可达且不解密的代理承载其 443 回退连接；不能承诺代理比直连快，也不能因此保证通知即时送达。见 [Apple 官方说明](https://support.apple.com/en-vn/102266)。不要对 APNs 开启 HTTPS 解密。
 
-## 必须做一次的迁移
+## 从旧版迁移到 v1.4
+
+v1.4 新增了代理分组。使用本地副本的用户需要下载新模板并启用新副本，才能看到新的分组。规则集刷新只能更新已有规则集的内容。
 
 1. 记录当前 Muse、ChatGPT 和其他组的节点选择，备份个人配置。
 2. Shadowrocket → 配置 → ＋ → URL 填上方链接 → 下载。
 3. 点击下载的文件 → 编辑配置 → 复制（具体菜单随版本变化），将副本命名为 **DailyRoute-Local.conf**。这里使用“复制”，不选“扩展配置”。
 4. 编辑副本的纯文本，在 `[General]` 中删除应用自动添加的 `update-url = ...`（若没有就不用删）；保留所有 RULE-SET 行。确认副本不再有整份配置更新地址。
 5. 点击 **DailyRoute-Local.conf → 使用配置**，确认 ✓ 在副本旁，首页全局路由选 **配置**。
-6. Muse美国 选实际美国节点、ChatGPT日本 选实际日本节点。初始 REJECT 只用于首次待配置状态。
-7. 配置的“规则集 URL”应下载成功 **11/11**。先测试基本连接，再开启后台更新。
+6. 在 Muse美国、ChatGPT美国中分别选美国节点，在 OKX台湾中选台湾节点。新分组初始为 REJECT，选好节点后才会连接。
+7. 在配置的“规则集 URL”页确认成功 **12/12**。先测试基本连接，再开启后台更新。
 8. Shadowrocket 设置 → 配置 → 自动后台更新，选择可用间隔（例如 1 天）；iPhone 设置 → 通用 → 后台 App 刷新，允许 Shadowrocket。不要把“节点订阅更新”当作规则更新。
 
 以后只刷新远程规则集，本地组定义、节点选择和网络参数不在公共规则文件里，不会被远程规则覆盖。不要再对已经设置好的本地副本执行“从服务器整份更新配置”。
@@ -66,7 +68,8 @@ GitHub 定时任务可能延迟；iOS 后台任务也不是准点保证。定时
 | 服务 | 策略 |
 |---|---|
 | Muse | Muse美国，首次选择美国节点 |
-| ChatGPT/OpenAI | ChatGPT日本，首次选择日本节点 |
+| ChatGPT/OpenAI | ChatGPT美国，首次选择美国节点 |
+| OKX | OKX台湾，首次选择台湾节点，覆盖 `okx.com` 及其子域名 |
 | YouTube | PROXY，优先沿用原来流畅的首页节点，可切自动低延迟 |
 | App Store 下载 | PROXY，可切 DIRECT 比较 |
 | Telegram | 独立 Telegram 组，默认 PROXY |
@@ -76,9 +79,11 @@ GitHub 定时任务可能延迟；iOS 后台任务也不是准点保证。定时
 
 名称筛选不证明实际出口国家；低延迟不代表视频吞吐量最高。地区组不提供其他地区回退，但未收录的新接口仍需检查连接记录。通知还依赖系统权限、专注模式和 App 内开关。
 
+微信视频期间如果国内网站可访问，只有代理 App 卡住，请按使用说明在通话前、通话中、挂断后对比同一代理 App 和节点。[微信视频通话排查](OriginalPlus-Guide.md#8-微信视频通话期间代理-app-卡住)
+
 ## 验证和目录
 
-- [original-plus-validation.json](original-plus-validation.json)：728 条去重后规则、11 个本地分组、11 个远程集、43 项回归检查；迁移时 1375 个样本的路由结果与前版相同。
+- [original-plus-validation.json](original-plus-validation.json) 记录 731 条规则、12 个本地分组、12 个远程规则集和 50 项域名/IP 检查。
 - [GitHub Actions](https://github.com/oyyj11/shadowrocket-daily-route/actions)：push/PR 校验，定时和手动同步。
 - [规则脚本](scripts/)：Python 标准库；同步失败或校验不通过时不发布新的 Telegram 数据。
 - [通知官方数据来源](notification-sources.json) · [更新记录](CHANGELOG.md)

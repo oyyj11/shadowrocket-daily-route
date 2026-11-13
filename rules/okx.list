@@ -1,0 +1,3 @@
+# OKX website, REST and WebSocket endpoints. The local policy group selects the exit.
+# Source: https://www.okx.com/docs-v5/en/
+DOMAIN-SUFFIX,okx.com

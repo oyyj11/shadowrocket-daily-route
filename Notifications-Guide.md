@@ -1,6 +1,6 @@
 # Telegram、X 等应用：通知设置与验证
 
-适用：v1.3 模板复制后的本地配置 `DailyRoute-Local.conf`。更新日期：2026-11-05。
+适用于 v1.4 模板复制后的本地配置 `DailyRoute-Local.conf`。
 
 ## 这次补充了什么
 
@@ -10,14 +10,14 @@
 | X / Twitter 已有域名及新增 t.co | 海外社交 → PROXY | 保持业务请求、短链可达 |
 | push.apple.com 及 Apple 公布的较窄 APNs 网段 | 苹果推送 → 所选模板默认 DIRECT 或 PROXY | 为匹配到的共享系统推送连接提供独立策略 |
 
-Muse 美国、ChatGPT 日本、YouTube 默认出口、国内直连和原网络参数保持。数据来源和快照见 [notification-sources.json](notification-sources.json)。
+两份模板均为 Muse 和 ChatGPT 提供美国分组，为 OKX 提供台湾分组。[推送和 Telegram 地址来源](notification-sources.json)
 
 ## APNs 两种下载入口
 
 - [默认直连版](https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf)
 - [默认代理版](https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-APNs-Proxy.conf)
 
-两份都是当前版本，只改苹果推送默认选项。已安装本地配置的用户，直接在苹果推送组切 DIRECT / PROXY 也能对照。代理版 PROXY 跟随首页节点，可在该组改为稳定的手动节点；它不是固定美国，Muse 美国与 ChatGPT 日本保持独立。
+两份模板的苹果推送默认选项不同。已安装本地配置的用户，可以在苹果推送组切换 DIRECT 或 PROXY 来对照。PROXY 跟随首页节点，也可在该组选择手动节点。Muse、ChatGPT 和 OKX 使用各自的节点组。
 
 测试时一次只切一个选项，重新连接后锁屏，让另一账号发送新消息，比较实际通知。不要以规则测试成功代替送达验证。系统旁路的 APNs 连接可能不受策略控制，详见下文。
 
@@ -42,7 +42,7 @@ APNs 通道正常，有时能先收到通知，但打开 App 加载详情、下�
 https://raw.githubusercontent.com/oyyj11/shadowrocket-daily-route/main/DailyRoute-OriginalPlus.conf
 ```
 
-已迁移到 v1.3 的用户，只需对本地副本使用“使用配置/编译配置”刷新远程规则，不要重新用整份模板覆盖个人副本。首次迁移按 [完整说明](OriginalPlus-Guide.md) 复制本地配置、移除 update-url 并选择美国/日本节点。规则集应成功 11/11。
+已迁移到 v1.4 的用户，可用「使用配置」或「编译配置」刷新本地副本的规则集。首次迁移时，复制本地配置、移除整份更新地址，选择美国和台湾节点。规则集应成功 12/12。[完整迁移步骤](OriginalPlus-Guide.md)
 
 在代理分组中确认：
 

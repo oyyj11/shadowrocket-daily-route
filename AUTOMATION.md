@@ -12,7 +12,8 @@
 | 内容 | 文件 |
 |---|---|
 | Muse 美国请求 | rules/muse-us.list |
-| ChatGPT 日本请求 | rules/chatgpt-jp.list |
+| ChatGPT 美国请求 | rules/chatgpt-jp.list（沿用旧文件名，实际策略由本地分组决定） |
+| OKX 台湾请求 | rules/okx.list |
 | YouTube | rules/youtube.list |
 | App Store 下载 | rules/appstore.list |
 | Telegram | rules/telegram.list（IP 部分由官方同步，域名手工维护） |
@@ -60,13 +61,13 @@ python scripts/sync_telegram.py
 
 ## 规则优先级与本地设置
 
-苹果推送、Telegram、Muse、ChatGPT、YouTube、App Store、流媒体、社交、海外优先例外、国内、其余海外按模板顺序匹配，最后是中国大陆 GEOIP 直连和海外默认兜底。
+苹果推送、Telegram、Muse、ChatGPT、OKX、YouTube、App Store、流媒体、社交、海外优先例外、国内、其余海外按模板顺序匹配，最后是中国大陆 GEOIP 直连和海外默认兜底。
 
 本地副本的 RULE-SET 顺序不要随意调整。公共列表没有分组默认值，因此日常列表更新不会把 Muse/ChatGPT 改回 REJECT；节点订阅删除或改名、用户手动覆盖整个模板仍可能需要重新选择。
 
 ## 验证局限
 
-CI 检查不是 Shadowrocket 官方解析器或真机实测。手机首次必须 11/11 成功下载规则，并验证一次手动刷新前后节点选择和服务访问。后台更新是否执行由手机系统状态决定。
+首次在手机导入后，确认规则集下载成功 12/12，再检查节点选择和服务访问。后台更新时间由手机系统调度。
 
 参考：[Shadowrocket 社区手册：自动更新与本地资源刷新](https://github.com/LOWERTOP/Shadowrocket#自动更新)。
 

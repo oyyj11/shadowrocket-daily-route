@@ -4,6 +4,9 @@ DOMAIN-SUFFIX,qq.com
 DOMAIN-SUFFIX,wechat.com
 DOMAIN-SUFFIX,weixin.qq.com
 DOMAIN-SUFFIX,weixin.com
+# WeChat companion domains: https://github.com/blackmatrix7/ios_rule_script/tree/master/rule/Shadowrocket/WeChat
+DOMAIN-SUFFIX,weixinbridge.com
+DOMAIN-SUFFIX,wechatos.net
 DOMAIN-SUFFIX,tenpay.com
 DOMAIN-SUFFIX,alipay.com
 DOMAIN-SUFFIX,alipayobjects.com

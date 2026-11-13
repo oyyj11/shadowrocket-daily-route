@@ -1,9 +1,9 @@
 {
   "base_sha256": "752b299faeddb81118c305056d4f25d6f8f6964ecd08043070e20939555a814f",
-  "rules": 728,
+  "rules": 731,
   "base_rules_preserved": 612,
   "new_rules": null,
-  "groups": 11,
+  "groups": 12,
   "general_unchanged": true,
   "host_and_rewrite_unchanged": true,
   "no_country_group_fallback": true,
@@ -12,12 +12,15 @@
     "muse.ai": "Muse美国",
     "api.muse.ai": "Muse美国",
     "auth.meta.com": "Muse美国",
-    "chatgpt.com": "ChatGPT日本",
-    "chat.com": "ChatGPT日本",
-    "api.openai.com": "ChatGPT日本",
-    "cdn.oaistatic.com": "ChatGPT日本",
-    "chatgpt.livekit.cloud": "ChatGPT日本",
-    "production-openaicom-storage.azureedge.net": "ChatGPT日本",
+    "chatgpt.com": "ChatGPT美国",
+    "chat.com": "ChatGPT美国",
+    "api.openai.com": "ChatGPT美国",
+    "cdn.oaistatic.com": "ChatGPT美国",
+    "chatgpt.livekit.cloud": "ChatGPT美国",
+    "production-openaicom-storage.azureedge.net": "ChatGPT美国",
+    "www.okx.com": "OKX台湾",
+    "openapi.okx.com": "OKX台湾",
+    "ws.okx.com": "OKX台湾",
     "www.youtube.com": "YouTube",
     "r1.googlevideo.com": "YouTube",
     "i.ytimg.com": "YouTube",
@@ -31,6 +34,10 @@
     "open.spotify.com": "海外流媒体",
     "www.jd.com": "DIRECT",
     "api.wechat.com": "DIRECT",
+    "badjs.weixinbridge.com": "DIRECT",
+    "wechatos.net": "DIRECT",
+    "apd-pcdnwxnat.teg.tencent-cloud.net": "DIRECT",
+    "apd-pcdnwxlogin.teg.tencent-cloud.net": "DIRECT",
     "www.douyin.com": "DIRECT",
     "www.xiaohongshu.com": "DIRECT",
     "www.bilibili.com": "DIRECT",
@@ -56,8 +63,8 @@
   "scope": "Static rule/priority checks only; no Shadowrocket runtime, node geolocation, throughput or notification-delivery verification.",
   "notification_update": "2026-11-05",
   "notification_tests_note": "Includes IPv4 / IPv6 literal-IP checks; local rule classification only, not actual notification delivery.",
-  "release": "v1.3",
-  "config_sha256": "3ad7e87d5bbaf13d74983403b1c3dc46813d598d25008831d0d3ad1f4d507981",
+  "release": "v1.4",
+  "config_sha256": "daacb3e27ba5ec24f3c00e5486e8d82e209faab5183d8e5de1a9c563a56f5a04",
   "release_note": "本地个人节点组 + 远程规则集；一次迁移后只刷新规则，不覆盖组定义。",
   "rule_sets": [
     {
@@ -80,9 +87,15 @@
     },
     {
       "file": "rules/chatgpt-jp.list",
-      "policy": "ChatGPT日本",
+      "policy": "ChatGPT美国",
       "rules": 17,
-      "sha256": "ae0b85d72007f30f58b9d15eabe5bf193eb134ffb70dd77192e9f3c81b6d3015"
+      "sha256": "513b55a0a22fc7d8bdfa47f686ec01da16197947a535397723227acac95554bb"
+    },
+    {
+      "file": "rules/okx.list",
+      "policy": "OKX台湾",
+      "rules": 1,
+      "sha256": "f1d814ad7c3fed14db08ef54cc88db3aa3ae2bea15b005405905a67563f08d66"
     },
     {
       "file": "rules/youtube.list",
@@ -117,8 +130,8 @@
     {
       "file": "rules/direct.list",
       "policy": "DIRECT",
-      "rules": 386,
-      "sha256": "7a29b7ed0e35fd1a5bfc66f72ad30c03e026d8ac48d5519bef2af7ca2d5d3646"
+      "rules": 388,
+      "sha256": "9d0825ab7b23baffc35b322a9e0a69d845b6c7ce171cf2c01533c3dee72136ac"
     },
     {
       "file": "rules/overseas.list",
@@ -129,6 +142,6 @@
   ],
   "migration_witnesses": 1375,
   "migration_mismatches": [],
-  "apns_proxy_variant_sha256": "7a51138c9ac81dd5a75a399b076cdb343df6d250b4078bc4ce4dcf65b07cefff",
+  "apns_proxy_variant_sha256": "02828272fc64c954805e83607e67cceb28f4e9ae5e0d2d67f0277ac970ecffb7",
   "variant_only_changes_apns_default": true
 }

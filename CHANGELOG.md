@@ -1,5 +1,11 @@
 # 更新记录
 
+## v1.4 · 2026-11-13
+
+- ChatGPT 改用独立美国分组，新增 OKX 台湾分组。
+- 补充 `weixinbridge.com` 和 `wechatos.net` 直连规则，在使用说明加入微信视频期间代理 App 卡住的排查步骤。
+- 两个 APNs 模板共用 12 个规则集。旧本地副本需要迁移一次才能获得新的地区分组。
+
 ## v1.3 · 2026-11-05：APNs 直连/代理双入口
 
 - 原固定 URL 保持 APNs 默认 DIRECT，新增 DailyRoute-APNs-Proxy.conf 默认 PROXY。
