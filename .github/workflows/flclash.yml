@@ -1,0 +1,14 @@
+name: Validate FlClash routing script
+on:
+  push:
+    paths: ['FlClash/**', '.github/workflows/flclash.yml']
+  pull_request:
+    paths: ['FlClash/**', '.github/workflows/flclash.yml']
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: node FlClash/test.cjs

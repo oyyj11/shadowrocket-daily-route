@@ -89,3 +89,7 @@ Shadowrocket 根据连接的目标域名和 IP 匹配规则。国内 App 调用�
 - [通知官方数据来源](notification-sources.json) · [更新记录](CHANGELOG.md)
 
 仓库提供 APNs 默认直连与默认代理两份可更新配置。规则分类参考用户提供的 default.conf。更新设置参考 Shadowrocket 社区手册，具体菜单及后台更新时间以手机为准。[自动更新说明](https://github.com/LOWERTOP/Shadowrocket#自动更新)
+
+## Windows FlClash
+
+电脑端 OpenAI / Google 美国分流独立维护，见 [FlClash 安装及更新说明](FlClash/README.md)。不影响现有 Shadowrocket 下载入口。
